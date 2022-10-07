@@ -1,0 +1,14 @@
+{
+  "name": "pipocajs",
+  "version": "0.32.0",
+  "description": "",
+  "main": "index.js",
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "coloral": "github:kruceo/coloraljs"
+  },
+  "bin": {
+    "pipoca": "./outex.js"
+  }
+}
