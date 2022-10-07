@@ -32,29 +32,26 @@ function readFile() {
 
     allBrackets = allBrackets.sort((a, b) => a.pos - b.pos);
     console.log(allBrackets);
-    let ppp = 0;
+    let act = 0;
     let jump = 0;
-    while (ppp + 1 < allBrackets.length) {
-      if (allBrackets[ppp].type == allBrackets[ppp + 1].type) {
+    while (act + 1 < allBrackets.length) {
+      if (allBrackets[act].type == allBrackets[act + 1].type) {
         jump++;
       } else {
         closedBrackets.push({
-          pos1: allBrackets[ppp - jump].pos,
-          pos2: allBrackets[ppp + 1 + jump].pos,
+          pos1: allBrackets[act - jump].pos,
+          pos2: allBrackets[act + 1 + jump].pos,
         });
-        ppp++;
+        act++;
       }
-      ppp++;
+      act++;
     }
     while (cachedSave.includes("function")) {
       let x = cachedSave.indexOf("function");
       let z = cachedSave.indexOf("(", x);
-
       let w = save.indexOf("{", z + 1);
 
       found = cachedSave.slice(x, z);
-
-      console.log(found);
 
       if (found.length == 0) {
         break;
@@ -69,7 +66,7 @@ function readFile() {
         }
       }
 
-      cachedSave = cachedSave.replace(found, "$".padEnd(found.length));
+      cachedSave = cachedSave.replace(found, "$FUNC".padEnd(found.length));
     }
 
     while (cachedSave.includes(")=>")) {
@@ -90,7 +87,7 @@ function readFile() {
         }
       }
 
-      cachedSave = cachedSave.replace(found, "$arrow".padEnd(found.length));
+      cachedSave = cachedSave.replace(found, "$Arrow".padEnd(found.length,'%'));
     }
 
     while (
@@ -117,9 +114,10 @@ function readFile() {
   } catch (e) {
     console.error("error");
   }
-  fs.writeFileSync("out.log", cachedSave);
 }
-console.log(fun);
+
+readFile();
+
 fs.watch("./.git/logs/HEAD", () => {
   readFile();
   let points = 0;
@@ -165,5 +163,4 @@ fs.watch("./.git/logs/HEAD", () => {
   postFun = fun;
 
   postVariables = variables;
-  console.log("----------------------------");
 });
