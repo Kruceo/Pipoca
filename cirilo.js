@@ -10,7 +10,6 @@ let commits = lines.filter((line)=>{
     if(line.includes('commit'))
     {
         return line;
-
     }
 })
 
