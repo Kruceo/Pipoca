@@ -1,1 +1,1 @@
-{"name":"pipocajs","version":"0.1.1","description":"","main":"index.js","author":"","license":"ISC","dependencies":{"coloral":"github:kruceo/coloraljs"},"bin":{"pipoca":"./cirilo.js"}}
+{"name":"pipocajs","version":"0.1.2","description":"","main":"index.js","author":"","license":"ISC","dependencies":{"coloral":"github:kruceo/coloraljs"},"bin":{"pipoca":"./cirilo.js"}}
