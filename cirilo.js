@@ -2,7 +2,7 @@ const { exec } = require('child_process');
 const fs = require('fs');
 const { setToVersion } = require('./managePkg');
 let isSaving = false;
-fs.watchFile('.git/index',()=>{
+fs.watchFile('.git/logs/HEAD',()=>{
     if(isSaving)return
 let lines = fs.readFileSync('.git/logs/HEAD', 'utf-8').split('\n');
 let major = 0,minor = 0,patch = 0;
@@ -41,7 +41,7 @@ commits.forEach((commit,index)=>
 setToVersion(major,minor,patch);
 isSaving = true;
 exec('git add package.json');
-exec('git commit -m')
+console.log(exec('git commit -m "pipoca:fix: version"').stdout)
 setTimeout(()=>isSaving = false,2000)
 
 })
