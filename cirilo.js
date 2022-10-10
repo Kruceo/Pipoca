@@ -41,10 +41,9 @@ commits.forEach((commit,index)=>
 setToVersion(major,minor,patch);
 isSaving = true;
 exec('git add package.json');
-exec('git commit -m "pipoca:fix: version"').stdout.on('data',(data)=>
-{
-    console.log(data);
-})
+let commitProc = exec('git commit -m "pipoca:fix: version"');
+commitProc.stdout.on('data',(data)=>{console.log(data);})
+
 setTimeout(()=>isSaving = false,2000)
 
 })
