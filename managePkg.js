@@ -20,6 +20,27 @@ function addToVersion(major,minor,patch)
    console.log(ver);
   fs.writeFileSync('./package.json',JSON.stringify(pkg))
 }
+function setToVersion(major,minor,patch)
+{
+    let pkg = JSON.parse(fs.readFileSync('./package.json','utf-8'));
+    const v = pkg.version.split('.');
+    
+    let lenght = (v.length);
+    var ver = []
+    for(var l = 0; l< 3; l++)
+    {
+       var i = parseInt(v[l]);
+       
+       
+       ver.push(i)
+    }
+    ver[2] = patch;
+    ver[1] = minor;
+    ver[0] = major;
+   pkg.version = ver.toString().replaceAll(',','.')
+   console.log(ver);
+  fs.writeFileSync('./package.json',JSON.stringify(pkg))
+}
 function setToPatch(patch)
 {
     let pkg = JSON.parse(fs.readFileSync('./package.json','utf-8'));
@@ -58,4 +79,4 @@ function setToMinor(minor)
    console.log(ver);
   fs.writeFileSync('./package.json',JSON.stringify(pkg))
 }
-module.exports = { addToVersion, setToPatch }
+module.exports = { addToVersion, setToPatch, setToVersion }

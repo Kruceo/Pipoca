@@ -1,10 +1,9 @@
-#!/usr/bin/env node
+//#!/usr/bin/env node
 const fs = require("fs");
 const { coloral: c } = require("coloral");
 const { exec } = require("child_process");
 const { addToVersion, setToPatch } = require("./managePkg");
-const { stderr, stdout, argv } = require("process");
-const { posix } = require("path");
+const { argv } = require("process");
 
 let pkg = JSON.parse(fs.readFileSync("./package.json", "utf-8"));
 let actualVersion = pkg.version.split(".");
