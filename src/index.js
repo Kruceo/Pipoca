@@ -8,6 +8,10 @@ if (!fs.existsSync(".git"))
   console.log(c.markred(" ERROR ") + " .git not exist!");
 
 console.log(c.markocean(" INFO ") + " Watching...");
+try
+{
+
+
 fs.watchFile(".git/logs/HEAD", () => {
   if (isSaving) return;
   let lines = fs.readFileSync(".git/logs/HEAD", "utf-8").split("\n");
@@ -58,3 +62,7 @@ fs.watchFile(".git/logs/HEAD", () => {
   });
   setTimeout(() => isSaving = false, 2000);
 });
+}catch(error)
+{
+  console.log(c.markred(' ERROR ')+ 'No commits');
+}
