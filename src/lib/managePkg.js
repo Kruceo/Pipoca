@@ -3,6 +3,7 @@ const { formatPkg } = require('./util');
 function addToVersion(major,minor,patch)
 {
     let pkg = JSON.parse(fs.readFileSync('./package.json','utf-8'));
+    if(!pkg)return
     const v = pkg.version.split('.');
     
     let lenght = (v.length);
@@ -24,6 +25,7 @@ function addToVersion(major,minor,patch)
 function setToVersion(major,minor,patch)
 {
     let pkg = JSON.parse(fs.readFileSync('./package.json','utf-8'));
+    if(!pkg)return
     const v = pkg.version.split('.');
     
     let lenght = (v.length);
