@@ -1,11 +1,12 @@
 #!/usr/bin/env node
 const { exec } = require('child_process');
 const fs = require('fs');
+const {coloral : c} = require('coloral')
 const { setToVersion } = require('./managePkg');
 let isSaving = false;
-if(!fs.existsSync('.git'))console.log('.git not exist!');
+if(!fs.existsSync('.git'))console.log(c.markred(' ERROR ')+' .git not exist!');
 
-console.log('watching...');
+console.log(c.markocean(' INFO ')+' Watching...');
 fs.watchFile('.git/logs/HEAD',()=>{
     if(isSaving)return
 let lines = fs.readFileSync('.git/logs/HEAD', 'utf-8').split('\n');
@@ -45,7 +46,7 @@ setToVersion(major,minor,patch);
 isSaving = true;
 exec('git add package.json');
 let commitProc = exec('git commit -m "pipoca:fix: version"');
-commitProc.stdout.on('data',(data)=>{console.log(data);})
+commitProc.stdout.on('data',(data)=>{console.log(c.markocean(' INFO ') + ' Pipoca commited!')})
 
 setTimeout(()=>isSaving = false,2000)
 
