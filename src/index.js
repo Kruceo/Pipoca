@@ -37,7 +37,15 @@ fs.watchFile(".git/logs/HEAD", () => {
       patch = 0;
     }
   });
-  setToVersion(major, minor, patch);
+  let setVersion = setToVersion(major, minor, patch);
+  if(setVersion.error)
+  {
+    console.log(c.markred(' ERROR ')+' replacing version');
+  }
+  else
+  {
+    console.log(c.markgreen(' PKG ') + ' '+setVersion.message);
+  }
   isSaving = true;
   exec("git add package.json");
   let commitProc = exec('git commit -m "pipoca:fix: version"');
