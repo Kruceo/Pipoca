@@ -1,12 +1,15 @@
 {
   "name":"pipocajs",
-  "version":"0.1.12",
+  "version":"0.1.13",
   "description":"",
   "main":"index.js",
   "author":"",
   "license":"ISC",
   "dependencies":{
     "coloral":"github:kruceo/coloraljs",
-"coloraljs":"github:kruceo/coloraljs"},
+    "coloraljs":"github:kruceo/coloraljs"
+},
   "bin":{
-"pipoca":"./cirilo.js"}}
+    "pipoca":"./cirilo.js"
+}
+}
