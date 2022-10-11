@@ -44,6 +44,7 @@ function doRead() {
     if (i == "att") {
       minor++;
       patch = 0;
+      
     }
     if (i == "new") {
       major++;
