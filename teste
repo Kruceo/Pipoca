@@ -1,0 +1,311 @@
+commit c5129abf9932244f508d664819791b1a79e2c689
+Author: Kruceo <rafa2015krueger@gmail.com>
+Date:   Tue Oct 11 11:42:22 2022 -0300
+
+    fix: teste
+
+commit 70a8fa0f4f3d190ad068e6be0cba8bf7e9ea532b
+Author: Kruceo <rafa2015krueger@gmail.com>
+Date:   Tue Oct 11 11:19:29 2022 -0300
+
+    att: working and double commits bug fix
+
+commit c424bb21769dec5c33e9f966af532c307e25de69
+Author: Kruceo <rafa2015krueger@gmail.com>
+Date:   Tue Oct 11 09:04:18 2022 -0300
+
+    pipoca:fix: version
+
+commit 0ccacc768b6aff7ab0157e6ebcbeddc75056fef5
+Author: Kruceo <rafa2015krueger@gmail.com>
+Date:   Tue Oct 11 09:04:14 2022 -0300
+
+    fix: two logs bug
+
+commit 810eabe8a7750f785e7bba08fa778d8ccdeb11a3
+Author: Kruceo <rafa2015krueger@gmail.com>
+Date:   Tue Oct 11 09:03:11 2022 -0300
+
+    pipoca:fix: version
+
+commit 3243c2b58b0de58014564e699ee9c3109433e124
+Author: Kruceo <rafa2015krueger@gmail.com>
+Date:   Tue Oct 11 09:03:10 2022 -0300
+
+    fix: two logs bug
+
+commit 5c352f6a91f82cd36d0e50a638ef69229333aebb
+Author: Kruceo <rafa2015krueger@gmail.com>
+Date:   Tue Oct 11 08:59:26 2022 -0300
+
+    pipoca:fix: version
+
+commit 02fb2ebfb85eda3f3678e563faad6f25fc1ec84d
+Author: Kruceo <rafa2015krueger@gmail.com>
+Date:   Tue Oct 11 08:49:33 2022 -0300
+
+    fix: try catch at init
+
+commit 8e67014759b266a24e8a9364fb0589cd9c4121a8
+Author: Kruceo <rafa2015krueger@gmail.com>
+Date:   Tue Oct 11 08:37:37 2022 -0300
+
+    fix: no saving pkg error
+
+commit 4f873b530c3b08483addbf1898181c1a53cf2d5a
+Author: Kruceo <rafa2015krueger@gmail.com>
+Date:   Tue Oct 11 08:24:29 2022 -0300
+
+    fix: package manager messages
+
+commit 87c5ea85ddf844509f677aeeecf7a7b779afe106
+Author: Kruceo <rafa2015krueger@gmail.com>
+Date:   Tue Oct 11 08:15:05 2022 -0300
+
+    pipoca:fix: version
+
+commit 64c9517f52bff907cddb15ad1b93d180841a26a5
+Author: Kruceo <rafa2015krueger@gmail.com>
+Date:   Tue Oct 11 08:15:01 2022 -0300
+
+    fix: no pkg protection
+
+commit 56fda264322ed29ac0675ad5578423db30ccbbbb
+Author: Kruceo <rafa2015krueger@gmail.com>
+Date:   Mon Oct 10 22:28:07 2022 -0300
+
+    pipoca:fix: version
+
+commit 65fc1b7bdffde3d4010b187f90346faf6ae95065
+Author: Kruceo <rafa2015krueger@gmail.com>
+Date:   Mon Oct 10 22:28:04 2022 -0300
+
+    fix: error log
+
+commit d9fa82258baf79ee1506b6c94cdc0f501dccee52
+Author: Kruceo <rafa2015krueger@gmail.com>
+Date:   Mon Oct 10 22:26:02 2022 -0300
+
+    pipoca:fix: version
+
+commit 53cae4f33d1b42a985dc4f680e8b53e69729da8a
+Author: Kruceo <rafa2015krueger@gmail.com>
+Date:   Mon Oct 10 22:26:02 2022 -0300
+
+    fix: coloral added
+
+commit a15d8e6f5766a4b3c56acd2286d610f5c22efbb3
+Author: Kruceo <rafa2015krueger@gmail.com>
+Date:   Mon Oct 10 22:17:30 2022 -0300
+
+    pipoca:fix: version
+
+commit 1d8079553f53dc7e2a865058226e3760327c869e
+Author: Kruceo <rafa2015krueger@gmail.com>
+Date:   Mon Oct 10 22:17:25 2022 -0300
+
+    fix: node_modules remove
+
+commit 35ed831cc75415e3545bee1b18d800f31550a225
+Author: Kruceo <rafa2015krueger@gmail.com>
+Date:   Mon Oct 10 22:16:34 2022 -0300
+
+    pipoca:fix: version
+
+commit 9a9fe33569924c61a5df6ab05cafeb7067122ed2
+Author: Kruceo <rafa2015krueger@gmail.com>
+Date:   Mon Oct 10 22:16:33 2022 -0300
+
+    fix: node_modules remove
+
+commit 644c3dcf95ca4968d5e3d3c49bd2293f68d1a0d2
+Author: Kruceo <rafa2015krueger@gmail.com>
+Date:   Mon Oct 10 22:14:49 2022 -0300
+
+    pipoca:fix: version
+
+commit 992db6b128a4825d940d8e774e08a92f1d26072c
+Author: Kruceo <rafa2015krueger@gmail.com>
+Date:   Mon Oct 10 22:14:46 2022 -0300
+
+    fix: format pkg on save
+
+commit 891560ca598d0c6c7e209c7166b1cb80a6f09038
+Author: Kruceo <rafa2015krueger@gmail.com>
+Date:   Mon Oct 10 22:14:21 2022 -0300
+
+    fix: format pkg on save
+
+commit 0561be2d69855ee9289a687fc8ff2eea4ec57749
+Author: Kruceo <rafa2015krueger@gmail.com>
+Date:   Mon Oct 10 22:13:49 2022 -0300
+
+    pipoca:fix: version
+
+commit d94ef767d037e9c84be2e4f25c7e664b181582b7
+Author: Kruceo <rafa2015krueger@gmail.com>
+Date:   Mon Oct 10 22:13:47 2022 -0300
+
+    fix: format pkg on save
+
+commit d6f80298d6b4cbe0390652bd672f837f5d7d0189
+Author: Kruceo <rafa2015krueger@gmail.com>
+Date:   Mon Oct 10 22:13:10 2022 -0300
+
+    pipoca:fix: version
+
+commit 92a39ea76a821d98b3fae2de0122d108b9bd1bde
+Author: Kruceo <rafa2015krueger@gmail.com>
+Date:   Mon Oct 10 22:13:07 2022 -0300
+
+    fix: format pkg on save
+
+commit 95a503d3f72c080f7ecbf8bb478fc6530a205f79
+Author: Kruceo <rafa2015krueger@gmail.com>
+Date:   Mon Oct 10 22:12:30 2022 -0300
+
+    pipoca:fix: version
+
+commit 913212126093408b5d664848d009498593e690a9
+Author: Kruceo <rafa2015krueger@gmail.com>
+Date:   Mon Oct 10 22:12:28 2022 -0300
+
+    fix: format pkg on save
+
+commit a39f299f1d388dd029ec9b4312262565b78c4846
+Author: Kruceo <rafa2015krueger@gmail.com>
+Date:   Mon Oct 10 22:12:06 2022 -0300
+
+    pipoca:fix: version
+
+commit 33a708c519e0ee5a91ce68eebbb681a13b97a827
+Author: Kruceo <rafa2015krueger@gmail.com>
+Date:   Mon Oct 10 22:12:04 2022 -0300
+
+    fix: format pkg on save
+
+commit 224eac30ac30b8d34cb88d6b7d2afd08e6d0fc01
+Author: Kruceo <rafa2015krueger@gmail.com>
+Date:   Mon Oct 10 22:10:46 2022 -0300
+
+    pipoca:fix: version
+
+commit afac3507dfe64ecab8e30111285e2373216d930a
+Author: Kruceo <rafa2015krueger@gmail.com>
+Date:   Mon Oct 10 22:10:44 2022 -0300
+
+    fix: format pkg on save
+
+commit 61f1c42a44d2ea2005e28ef51c5ccae7aec0ef70
+Author: Kruceo <rafa2015krueger@gmail.com>
+Date:   Mon Oct 10 22:09:38 2022 -0300
+
+    fix: format pkg on save
+
+commit 7407296a943743afa06fbc3b417cf7875a5fb175
+Author: Kruceo <rafa2015krueger@gmail.com>
+Date:   Mon Oct 10 19:18:39 2022 -0300
+
+    pipoca:fix: version
+
+commit ad72055ee3d2f42ef321936066587fc3ecb1ec89
+Author: Kruceo <rafa2015krueger@gmail.com>
+Date:   Mon Oct 10 19:18:37 2022 -0300
+
+    fix: package bin
+
+commit 7fade1d1c5942331b7c864eaf9d0dd886721e3b4
+Author: Kruceo <rafa2015krueger@gmail.com>
+Date:   Mon Oct 10 17:54:37 2022 -0300
+
+    pipoca:fix: version
+
+commit 24bc31904d2f74709916d9849de9f43f66bbc960
+Author: Kruceo <rafa2015krueger@gmail.com>
+Date:   Mon Oct 10 17:54:37 2022 -0300
+
+    fix: package.json
+
+commit 2108e8e2489df848854f20761510305a48749e02
+Author: Kruceo <rafa2015krueger@gmail.com>
+Date:   Mon Oct 10 17:48:26 2022 -0300
+
+    pipoca:fix: version
+
+commit ee89d5b1e0b41ab0e3e44729efa7286c645a1053
+Author: Kruceo <rafa2015krueger@gmail.com>
+Date:   Mon Oct 10 17:48:25 2022 -0300
+
+    fix: stout child process
+
+commit edbc07b64e83dcbab559bfd991c56006b01b49fa
+Author: Kruceo <rafa2015krueger@gmail.com>
+Date:   Mon Oct 10 17:47:29 2022 -0300
+
+    pipoca:fix: version
+
+commit 8c060369b54220aaeabce690e7ff2855fa5610f9
+Author: Kruceo <rafa2015krueger@gmail.com>
+Date:   Mon Oct 10 17:47:26 2022 -0300
+
+    fix: stout child process
+
+commit 364c9d893993a4106a40c3604c365ec12e610376
+Author: Kruceo <rafa2015krueger@gmail.com>
+Date:   Mon Oct 10 17:46:56 2022 -0300
+
+    pipoca:fix: version
+
+commit 0258e9774b6efaf977f45aa473f9a57c7330bc2c
+Author: Kruceo <rafa2015krueger@gmail.com>
+Date:   Mon Oct 10 17:46:53 2022 -0300
+
+    fix: stout child process
+
+commit 6ec510573987a00f5900975fd35cd347ac3686c2
+Author: Kruceo <rafa2015krueger@gmail.com>
+Date:   Mon Oct 10 17:44:33 2022 -0300
+
+    pipoca:fix: version
+
+commit 44a09c0008972a75ff1747b4943611de146af9c8
+Author: Kruceo <rafa2015krueger@gmail.com>
+Date:   Mon Oct 10 17:44:28 2022 -0300
+
+    fix: log
+
+commit 344a1f1106cc4532caa1196a67ac6f0fc3fcb1b1
+Author: Kruceo <rafa2015krueger@gmail.com>
+Date:   Mon Oct 10 17:43:43 2022 -0300
+
+    pipoca:fix: version
+
+commit 91690d170439b5c57fa75a665f9f87ab52a2df9f
+Author: Kruceo <rafa2015krueger@gmail.com>
+Date:   Mon Oct 10 17:43:41 2022 -0300
+
+    fix: saving timeout
+
+commit 419a683e5b1de171c8b3eded95580c8ce88234e4
+Author: Kruceo <rafa2015krueger@gmail.com>
+Date:   Mon Oct 10 17:18:28 2022 -0300
+
+    att: cirilo implements
+
+commit 35aa4fcd2252b1ce1eaa63d13bebb2c05fd72321
+Author: Kruceo <rafa2015krueger@gmail.com>
+Date:   Fri Oct 7 11:46:17 2022 -0300
+
+    fix: out remove
+
+commit a5be722a9969ea8a72bad783f4f0dd5e313a4d8d
+Author: Kruceo <rafa2015krueger@gmail.com>
+Date:   Fri Oct 7 11:45:16 2022 -0300
+
+    fix: testing archives remove
+
+commit 42083bf7e90999274a240439e9fb303a40305277
+Author: Kruceo <rafa2015krueger@gmail.com>
+Date:   Fri Oct 7 11:40:00 2022 -0300
+
+    init
