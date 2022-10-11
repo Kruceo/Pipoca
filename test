@@ -1,3 +1,4 @@
+b289a53 att: use git log --all instead logs/HEAD
 c5129ab fix: teste
 70a8fa0 att: working and double commits bug fix
 c424bb2 pipoca:fix: version

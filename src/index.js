@@ -43,7 +43,7 @@ function doRead() {
     })
 
     commits.forEach((commit, index) => {
-      let i = commit.split(":")[0];
+      let i =''+ commit.split(":")[0];
       commits[index] = i;
         if (i.trim() == "fix") {
           patch++;
@@ -57,6 +57,7 @@ function doRead() {
           minor = 0;
           patch = 0;
         }
+        //console.log(i.replaceAll(' ',''));
       
     });
     console.log(c.markocean(" INF. ") + " Commits & Amends: " + commits.length);
