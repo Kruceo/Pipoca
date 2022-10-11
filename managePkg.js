@@ -1,4 +1,5 @@
 const fs = require('fs');
+const { formatPkg } = require('./util');
 function addToVersion(major,minor,patch)
 {
     let pkg = JSON.parse(fs.readFileSync('./package.json','utf-8'));

@@ -19,3 +19,4 @@ function formatPkg(packageStr)
     })
     return i;
 }
+module.exports = {formatPkg}
