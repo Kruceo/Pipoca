@@ -44,7 +44,7 @@ fs.watchFile(".git/logs/HEAD", () => {
   }
   else
   {
-    console.log(c.markgreen(' PKG ') + ' '+setVersion.message);
+    console.log(c.markgreen(' PKG. ') + ' '+setVersion.message);
   }
   isSaving = true;
   exec("git add package.json");
