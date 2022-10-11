@@ -23,7 +23,7 @@ try {
 
 function doRead() {
   if (isSaving) {
-    console.log(c.markwhite("".padEnd(40,' ')));
+    console.log(c.markblack("".padEnd(40,' ')));
     isSaving = false;
     return;
   }
