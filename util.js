@@ -8,7 +8,7 @@ function formatPkg(packageStr)
         let coef = 0
         if(line.includes('}'))
         {
-            coef -= 1
+            coef -=  1
         }   
         for(let y = 0;y<spc+coef;y++)
         {
