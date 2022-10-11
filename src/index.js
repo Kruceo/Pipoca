@@ -3,16 +3,26 @@ const { exec } = require("child_process");
 const fs = require("fs");
 const { coloral: c } = require("coloral");
 const { setToVersion } = require("./lib/managePkg.js");
+const { argv } = require("process");
 let isSaving = false;
+
+if(argv.at(2) == '--test')
+{
+  doRead();
+}
+
 if (!fs.existsSync(".git"))
   console.log(c.markred(" ERROR ") + " .git not exist!");
-
 console.log(c.markocean(" INFO ") + " Watching...");
-try
-{
+try {
+  fs.watchFile(".git/logs/HEAD", () => {
+    doRead();
+  });
+} catch (error) {
+  console.log(c.markred(" ERROR ") + "No commits");
+}
 
-
-fs.watchFile(".git/logs/HEAD", () => {
+function doRead() {
   if (isSaving) return;
   let lines = fs.readFileSync(".git/logs/HEAD", "utf-8").split("\n");
   let major = 0,
@@ -42,27 +52,20 @@ fs.watchFile(".git/logs/HEAD", () => {
     }
   });
   let setVersion = setToVersion(major, minor, patch);
-  if(setVersion.error)
-  {
-    console.log(c.markred(' ERROR ')+' replacing version');
-  }
-  else
-  {
-    console.log(c.markgreen(' PKG. ') + ' '+setVersion.message);
+  if (setVersion.error) {
+    console.log(c.markred(" ERROR ") + " replacing version");
+  } else {
+    console.log(c.markgreen(" PKG. ") + " " + setVersion.message);
   }
   isSaving = true;
   exec("git add package.json");
   let commitProc = exec('git commit -m "pipoca:fix: version"');
-  commitProc.stdout.on("data", (data) => {
+  commitProc.stdout.on("close", (data) => {
     console.log(c.markocean(" INFO ") + " Pipoca commited!");
   });
   commitProc.stdout.on("error", (data) => {
     console.log(c.markred(" ERROR ") + " Pipoca commit fails");
     console.log(data);
   });
-  setTimeout(() => isSaving = false, 2000);
-});
-}catch(error)
-{
-  console.log(c.markred(' ERROR ')+ 'No commits');
+  setTimeout(() => (isSaving = false), 2000);
 }
