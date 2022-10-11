@@ -47,7 +47,7 @@ isSaving = true;
 exec('git add package.json');
 let commitProc = exec('git commit -m "pipoca:fix: version"');
 commitProc.stdout.on('data',(data)=>{console.log(c.markocean(' INFO ') + ' Pipoca commited!')})
-
+commitProc.stdout.on('error',(data)=>{console.log(c.markred(' ERROR ') + ' Pipoca commit fails');console.log(data)})
 setTimeout(()=>isSaving = false,2000)
 
 })
