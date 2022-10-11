@@ -2,7 +2,7 @@ function formatPkg(packageStr)
 {
     let i = '';
     let spc = 0;
-    packageStr.replaceAll(',',',#!!@').replaceAll('{','{#!!@').replaceAll('}','#!!@}').split('#!!@').forEach((line)=>
+    packageStr.replaceAll(',',',\n#!!@').replaceAll('{','\n{#!!@').replaceAll('\n}','#!!@}').split('#!!@').forEach((line)=>
     {
         let coef = 0
         if(line.includes('}'))
