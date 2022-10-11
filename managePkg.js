@@ -39,7 +39,7 @@ function setToVersion(major,minor,patch)
     ver[0] = major;
    pkg.version = ver.toString().replaceAll(',','.')
    console.log(ver);
-  fs.writeFileSync('./package.json',JSON.stringify(pkg))
+  fs.writeFileSync('./package.json',formatPkg(JSON.stringify(pkg)))
 }
 function setToPatch(patch)
 {
@@ -58,7 +58,7 @@ function setToPatch(patch)
     ver[2] = patch;
    pkg.version = ver.toString().replaceAll(',','.')
    console.log(ver);
-  fs.writeFileSync('./package.json',JSON.stringify(pkg))
+  fs.writeFileSync('./package.json',formatPkg(JSON.stringify(pkg)))
 }
 function setToMinor(minor)
 {

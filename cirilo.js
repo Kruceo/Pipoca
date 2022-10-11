@@ -4,7 +4,7 @@ const fs = require('fs');
 const { setToVersion } = require('./managePkg');
 let isSaving = false;
 if(!fs.existsSync('.git'))console.log('.git not exist!');
-console.log(fs.readFileSync('package.json','utf-8'));
+
 console.log('watching...');
 fs.watchFile('.git/logs/HEAD',()=>{
     if(isSaving)return
