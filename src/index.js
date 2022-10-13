@@ -24,7 +24,7 @@ function start(path, args) {
     console.log(c.markred(" ERR. ") + " .git not exist!");
   console.log(c.markocean(" INF. ") + " Watching...");
   try {
-    fs.watchFile(path+".git/logs/HEAD", () => {
+    fs.watch(path+".git/logs/HEAD", () => {
       doRead();
     });
   } catch (error) {
