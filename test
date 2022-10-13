@@ -1,3 +1,4 @@
+a386015 fix: save history
 83309b0 att: minor bug fix
 b289a53 att: use git log --all instead logs/HEAD
 c5129ab fix: teste

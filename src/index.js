@@ -1,31 +1,39 @@
-#!/usr/bin/env node
+let config = null;
 const { exec, execSync } = require("child_process");
 const fs = require("fs");
 const { coloral: c } = require("coloral");
 const { setToVersion } = require("./lib/managePkg.js");
 const { argv, stdout, stderr } = require("process");
+const path = require("path");
 let isSaving = false;
+let minorKey, majorKey, patchKey;
+function start(path, args) {
+  if (fs.existsSync(path+".pipoca.json")) {
+    config = JSON.parse(fs.readFileSync(path+".pipoca.json"));
+    minorKey = config.keys.minor ?? "att";
+    patchKey = config.keys.patch ?? "fix";
+    majorKey = config.keys.major ?? "new";
+  }
 
-if (argv.at(2) == "--test") {
-  doRead();
-  return;
-}
-
-
-if (!fs.existsSync(".git"))
-  console.log(c.markred(" ERR. ") + " .git not exist!");
-console.log(c.markocean(" INF. ") + " Watching...");
-try {
-  fs.watchFile(".git/logs/HEAD", () => {
+  if (argv.at(2) == "--test") {
     doRead();
-  });
-} catch (error) {
-  console.log(c.markred(" ERR. ") + "No commits");
+    return;
+  }
+
+  if (!fs.existsSync(path+".git"))
+    console.log(c.markred(" ERR. ") + " .git not exist!");
+  console.log(c.markocean(" INF. ") + " Watching...");
+  try {
+    fs.watchFile(path+".git/logs/HEAD", () => {
+      doRead();
+    });
+  } catch (error) {
+    console.log(c.markred(" ERR. ") + "No commits");
+  }
 }
 
 function doRead() {
   exec("git log --all --oneline", (err, stdout, stderr) => {
-    fs.writeFileSync('test',stdout)
     if (isSaving) {
       console.log("\n");
       isSaving = false;
@@ -37,31 +45,31 @@ function doRead() {
       patch = 0;
     let commits = [];
 
-    lines.forEach((line,index)=>
-    {
-      commits[index] = line.slice(8,line.length);
-    })
+    lines.forEach((line, index) => {
+      commits[index] = line.slice(8, line.length);
+    });
 
-    commits.forEach((commit, index) => {
-      let i =''+ commit.split(":")[0];
+    commits.reverse().forEach((commit, index) => {
+      let i = "" + commit.split(":")[0];
       commits[index] = i;
-        if (i.trim() == "fix") {
-          patch++;
-          
-        }
-        if (i.trim() == "att") {
-          minor++;
-          patch = 0;
-        }
-        if (i.trim() == "new") {
-          major++;
-          minor = 0;
-          patch = 0;
-        }
-        fs.appendFileSync('history',major+'.'+minor+'.'+patch+'\n')
+      if (i.trim() == patchKey) {
+        patch++;
+      }
+      if (i.trim() == minorKey) {
+        minor++;
+        patch = 0;
+      }
+      if (i.trim() == majorKey) {
+        major++;
+        minor = 0;
+        patch = 0;
+      }
+      fs.appendFileSync(
+        path+"history",
+        i + " ==> " + major + "." + minor + "." + patch + "\n"
+      );
     });
     console.log(c.markocean(" INF. ") + " Commits & Amends: " + commits.length);
-    console.log(major,minor,patch);
     let setVersion = setToVersion(major, minor, patch);
     if (setVersion.error) {
       console.log(c.markred(" ERR. ") + " Replacing version");
