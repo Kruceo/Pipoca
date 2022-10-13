@@ -11,6 +11,7 @@ if (argv.at(2) == "--test") {
   return;
 }
 
+
 if (!fs.existsSync(".git"))
   console.log(c.markred(" ERR. ") + " .git not exist!");
 console.log(c.markocean(" INF. ") + " Watching...");
@@ -39,7 +40,6 @@ function doRead() {
     lines.forEach((line,index)=>
     {
       commits[index] = line.slice(8,line.length);
-     // console.log(line.slice(8,line.length+1));
     })
 
     commits.forEach((commit, index) => {
@@ -47,6 +47,7 @@ function doRead() {
       commits[index] = i;
         if (i.trim() == "fix") {
           patch++;
+          
         }
         if (i.trim() == "att") {
           minor++;
@@ -57,17 +58,13 @@ function doRead() {
           minor = 0;
           patch = 0;
         }
-        //console.log(i.replaceAll(' ',''));
-      
+        fs.appendFileSync('history',major+'.'+minor+'.'+patch+'\n')
     });
     console.log(c.markocean(" INF. ") + " Commits & Amends: " + commits.length);
-    if (commits[commits.length - 1] == "pipoca") {
-      return;
-    }
-
+    console.log(major,minor,patch);
     let setVersion = setToVersion(major, minor, patch);
     if (setVersion.error) {
-      console.log(c.markred(" ERR. ") + " replacing version");
+      console.log(c.markred(" ERR. ") + " Replacing version");
     } else {
       console.log(c.markgreen(" PKG. ") + " " + setVersion.message);
     }
@@ -90,5 +87,3 @@ function doRead() {
     });
   });
 }
-//setTimeout(() => {isSaving = false;console.log('termited');}, 10000);
-// setInterval(()=>{console.log(isSaving);},100
