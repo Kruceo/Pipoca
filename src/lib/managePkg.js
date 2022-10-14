@@ -43,7 +43,7 @@ function setToVersion(major,minor,patch)
    pkg.version = ver.toString().replaceAll(',','.')
   
   fs.writeFileSync('./package.json',formatPkg(JSON.stringify(pkg)))
-  return {error: false,message: v +' => ' + pkg.version}
+  return {error: false,message: v[0]+'.'+v[1]+'.'+v[2] +' => ' + pkg.version}
 }
 function setToPatch(patch)
 {
@@ -67,13 +67,11 @@ function setToMinor(minor)
     let pkg = JSON.parse(fs.readFileSync('./package.json','utf-8'));
     const v = pkg.version.split('.');
     
-    let lenght = (v.length);
+    //let lenght = (v.length);
     var ver = []
     for(var l = 0; l< 3; l++)
     {
        var i = parseInt(v[l]);
-       
-       
        ver.push(i)
     }
     ver[1] = minor;
