@@ -9,11 +9,11 @@ let isSaving = false;
 let minorKey, majorKey, patchKey;
 function start(path, args) {
   if (fs.existsSync(path+".pipoca.json")) {
-    config = JSON.parse(fs.readFileSync(path+".pipoca.json"));}
-    minorKey = config.keys?.minor ?? "att";
-    patchKey = config.keys?.patch ?? "fix";
-    majorKey = config.keys?.major ?? "new";
-  
+    config = JSON.parse(fs.readFileSync(path+".pipoca.json"));
+    minorKey = config?.keys?.minor ?? "att";
+    patchKey = config?.keys?.patch ?? "fix";
+    majorKey = config?.keys?.major ?? "new";
+  console.log(c.markpurple(' CFG. ')+' Tags: '+majorKey +'.'+minorKey+'.'+patchKey);
 
   if (argv.at(2) == "--test") {
     doRead();
@@ -94,6 +94,6 @@ function doRead() {
       console.log(c.markocean(" INF. ") + " Commit process closed");
     });
   });
-}
+}}
 
 module.exports = {start}
