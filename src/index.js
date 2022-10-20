@@ -37,7 +37,7 @@ function start(path, args) {
     return;
   }
   if (argv.at(2) == "--test") {
-    doRead();
+    doRead(true);
     return;
   }
 
@@ -53,7 +53,7 @@ function start(path, args) {
   }
 }
 
-function doRead() {
+function doRead(testing) {
   exec("git log --all --oneline", (err, stdout, stderr) => {
     if (isSaving) {
       console.log("\n");
@@ -85,10 +85,10 @@ function doRead() {
         minor = 0;
         patch = 0;
       }
-      fs.appendFileSync(
-        "history",
-        i + " ==> " + major + "." + minor + "." + patch + "\n"
-      );
+      if(testing)
+      {
+        console.log(i.trim().padEnd(10,' ') + '  '+major+"."+minor+"."+patch)
+      }
     });
     console.log(c.markocean(" INF. ") + " Commits & Amends: " + commits.length);
     let setVersion = setToVersion(major, minor, patch);

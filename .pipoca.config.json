@@ -3,6 +3,6 @@
       "keys":
       {
         "patch": "fix",
-        minor: "log"
+        "minor": "att"
       }
     }
