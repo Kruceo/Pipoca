@@ -107,7 +107,8 @@ function doRead(testing) {
     if (argv.at(2) == "--test") {
       return;
     }
-    exec("git add package.json");
+    execSync("git add package.json");
+    execSync("git add package-lock.json");
     let commitProc = exec("git commit --amend --no-edit");
 
     commitProc.stdout.on("data", (data) => {
