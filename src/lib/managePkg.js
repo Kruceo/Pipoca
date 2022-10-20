@@ -20,7 +20,7 @@ function addToVersion(major, minor, patch) {
    fs.writeFileSync('./package.json', JSON.stringify(pkg))
 }
 function setToVersion(major, minor, patch) {
-   if (fs.existsSync('./package.json')) return { error: true, message: 'package.json not exist' }
+   if (!fs.existsSync('./package.json')) return { error: true, message: 'package.json not exist' }
    let pkg = JSON.parse(fs.readFileSync('./package.json', 'utf-8'));
 
    const v = pkg.version.split('.');
