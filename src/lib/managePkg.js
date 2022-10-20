@@ -38,7 +38,7 @@ function setToVersion(major, minor, patch) {
    ver[0] = major;
    pkg.version = ver.toString().replaceAll(',', '.')
 
-   fs.writeFileSync('./package.json', formatPkg(JSON.stringify(pkg)))
+   fs.writeFileSync('./package.json', JSON.stringify(pkg,null,2))
    fixPkgLock(ver.toString().replaceAll(',', '.'))
    return { error: false, message: v[0] + '.' + v[1] + '.' + v[2] + ' => ' + pkg.version }
 }

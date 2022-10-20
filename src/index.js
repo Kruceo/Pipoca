@@ -55,7 +55,7 @@ function start(path, args) {
       doRead();
     });
   } catch (error) {
-    console.log(c.markred(" ERR. ") + "No commits");
+    console.log(c.markred(" ERR. ") + " No commits");
   }
 }
 
