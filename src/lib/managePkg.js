@@ -42,6 +42,7 @@ function setToVersion(major,minor,patch)
    pkg.version = ver.toString().replaceAll(',','.')
   
   fs.writeFileSync('./package.json',formatPkg(JSON.stringify(pkg)))
+  fixPkgLock(ver.toString().replaceAll(',','.'))
   return {error: false,message: v[0]+'.'+v[1]+'.'+v[2] +' => ' + pkg.version}
 }
 function setToPatch(patch)
@@ -77,5 +78,12 @@ function setToMinor(minor)
    pkg.version = ver.toString().replaceAll(',','.')
    console.log(ver);
   fs.writeFileSync('./package.json',JSON.stringify(pkg))
+}
+
+function fixPkgLock(v) {
+   const pkgLock = JSON.parse(fs.readFileSync("package-lock.json"));
+   pkgLock.version = v;
+   pkgLock.packages[""].version = v;
+   fs.writeFileSync("package-lock.json", JSON.stringify(pkgLock, null, 2));
 }
 module.exports = { addToVersion, setToPatch, setToVersion }
