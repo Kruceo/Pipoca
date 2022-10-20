@@ -7,6 +7,8 @@ const { argv, stdout, stderr } = require("process");
 const { parse } = require("path");
 let isSaving = false;
 let minorKey = "att", majorKey = "new", patchKey = "fix";
+
+let base = [0,0,0]
 function start(path, args) {
   let parsedPath = path;
   if (!path.endsWith('/')) {
@@ -18,6 +20,9 @@ function start(path, args) {
       minorKey = config.keys.minor ?? "att";
       patchKey = config.keys.patch ?? "fix";
       majorKey = config.keys.major ?? "new";
+
+      base = config.base.split('.')??[0,0,0]
+      console.log(config)
     }
   }catch(e)
   {
@@ -27,6 +32,7 @@ function start(path, args) {
   if (argv.at(2) == "--init") {
     fs.writeFileSync(parsedPath + '.pipoca.config.json', `
     {
+      "base": "0.0.0"
       "keys":
       {
         "patch": "fix",
@@ -61,9 +67,9 @@ function doRead(testing) {
       return;
     }
     let lines = stdout.split("\n");
-    let major = 0,
-      minor = 0,
-      patch = 0;
+    let major = base[0],
+      minor = base[1],
+      patch = base[2];
     let commits = [];
 
     lines.forEach((line, index) => {

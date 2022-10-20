@@ -66,10 +66,10 @@ git commit "kruceo: testing custom tag"
 
 This will disregard all your commits with "att", now it's just added on commits that have your new tag
 
-## To do a test
+## To do a a single run
 
 ```console
-pipoca --test
+pipoca --start
 ```
 
 Print in log anything like this

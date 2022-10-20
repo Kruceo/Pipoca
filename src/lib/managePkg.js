@@ -6,7 +6,6 @@ function addToVersion(major,minor,patch)
     if(!pkg)return
     const v = pkg.version.split('.');
     
-    let lenght = (v.length);
     var ver = []
     for(var l = 0; l< 3; l++)
     {
