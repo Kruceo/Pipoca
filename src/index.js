@@ -21,9 +21,9 @@ function start(path, args) {
     }
   }catch(e)
   {
-    console.log(c.markred(' ERR. ') + "Pipoca error reading pipoca.config.json")
+    console.log(c.markred(' ERR. ') + " Pipoca error reading pipoca.config.json")
   }
-  console.log(c.markpurple(' CFG. ') + ' Tags: ' + majorKey + '.' + minorKey + '.' + patchKey);
+  console.log(c.markpurple(' CFG. ') + ' Tags: ' + majorKey + ' ' + minorKey + ' ' + patchKey);
   if (argv.at(2) == "--init") {
     fs.writeFileSync(parsedPath + '.pipoca.config.json', `
     {
