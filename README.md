@@ -19,12 +19,13 @@ npm i -g kruceo/pipocajs
 pipoca
 ```
 
-With the Pipoca running, do any commit with the tag that you prefer
+With the Pipoca running, do any commit with the tag that you prefer.
+
 Remember, by default:
 
-* "fix" adds to patch (0.0.X)
-* "att" adds to minor (0.X.0)
-* "new" adds to major (X.0.0)
+* "fix" increments to patch (0.0.X)
+* "att" increments to minor (0.X.0)
+* "new" increments to major (X.0.0)
 
 ```console
 git add .

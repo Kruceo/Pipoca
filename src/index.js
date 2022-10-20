@@ -1,7 +1,7 @@
 let config = null;
 const { exec, execSync } = require("child_process");
 const fs = require("fs");
-const { coloral: c } = require("coloral");
+const { coloral: c } = require("coloraljs");
 const { setToVersion } = require("./lib/managePkg.js");
 const { argv, stdout, stderr } = require("process");
 const { parse } = require("path");
@@ -36,7 +36,7 @@ function start(path, args) {
     }`)
     return;
   }
-  if (argv.at(2) == "--test") {
+  if (argv.at(2) == "--start") {
     doRead(true);
     return;
   }
