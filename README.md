@@ -70,3 +70,15 @@ This will disregard all your commits with "att", now it's just added on commits 
 ```console
 pipoca --test
 ```
+
+Print in log anything like this
+
+```console
+init        0.0.0
+fix         0.0.1
+fix         0.0.2
+att         0.1.0
+fix         0.1.1
+pipoca      0.1.1
+fix         0.1.2
+```

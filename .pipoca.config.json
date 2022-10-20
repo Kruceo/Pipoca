@@ -3,6 +3,8 @@
       "keys":
       {
         "patch": "fix",
-        "minor": "att"
-      }
+        "minor": "att",
+        "major": "new"
+      },
+      "base": "0.0.0"
     }
