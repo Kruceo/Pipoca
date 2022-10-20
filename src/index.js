@@ -4,27 +4,48 @@ const fs = require("fs");
 const { coloral: c } = require("coloral");
 const { setToVersion } = require("./lib/managePkg.js");
 const { argv, stdout, stderr } = require("process");
-const path = require("path");
+const { parse } = require("path");
 let isSaving = false;
-let minorKey, majorKey, patchKey;
+let minorKey = "att", majorKey = "new", patchKey = "fix";
 function start(path, args) {
-  if (fs.existsSync(path+".pipoca.json")) {
-    config = JSON.parse(fs.readFileSync(path+".pipoca.json"));
-    minorKey = config?.keys?.minor ?? "att";
-    patchKey = config?.keys?.patch ?? "fix";
-    majorKey = config?.keys?.major ?? "new";
-  console.log(c.markpurple(' CFG. ')+' Tags: '+majorKey +'.'+minorKey+'.'+patchKey);
-
+  let parsedPath = path;
+  if (!path.endsWith('/')) {
+    parsedPath += '/'
+  }
+  try {
+    if (fs.existsSync(parsedPath + ".pipoca.config.json")) {
+      config = JSON.parse(fs.readFileSync(parsedPath + ".pipoca.config.json"));
+      minorKey = config.keys.minor ?? "att";
+      patchKey = config.keys.patch ?? "fix";
+      majorKey = config.keys.major ?? "new";
+    }
+  }catch(e)
+  {
+    console.log(c.markred(' ERR. ') + "Pipoca error reading pipoca.config.json")
+  }
+  console.log(c.markpurple(' CFG. ') + ' Tags: ' + majorKey + '.' + minorKey + '.' + patchKey);
+  if (argv.at(2) == "--init") {
+    fs.writeFileSync(parsedPath + '.pipoca.config.json', `
+    {
+      "keys":
+      {
+        "patch": "fix",
+        "minor": "att",
+        "major": "new"
+      }
+    }`)
+    return;
+  }
   if (argv.at(2) == "--test") {
     doRead();
     return;
   }
 
-  if (!fs.existsSync(path+".git"))
+  if (!fs.existsSync(parsedPath + ".git"))
     console.log(c.markred(" ERR. ") + " .git not exist!");
   console.log(c.markocean(" INF. ") + " Watching...");
   try {
-    fs.watch(path+".git/logs/HEAD", () => {
+    fs.watch(parsedPath + ".git/logs/HEAD", () => {
       doRead();
     });
   } catch (error) {
@@ -65,7 +86,7 @@ function doRead() {
         patch = 0;
       }
       fs.appendFileSync(
-        path+"history",
+        "history",
         i + " ==> " + major + "." + minor + "." + patch + "\n"
       );
     });
@@ -94,6 +115,6 @@ function doRead() {
       console.log(c.markocean(" INF. ") + " Commit process closed");
     });
   });
-}}
+}
 
-module.exports = {start}
+module.exports = { start }
