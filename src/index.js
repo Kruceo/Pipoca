@@ -32,7 +32,7 @@ function start(path, args) {
   if (argv.at(2) == "--init") {
     fs.writeFileSync(parsedPath + '.pipoca.config.json', `
     {
-      "base": "0.0.0"
+      "base": "0.0.0",
       "keys":
       {
         "patch": "fix",
