@@ -8,7 +8,7 @@ const { parse } = require("path");
 let isSaving = false;
 let minorKey = "att", majorKey = "new", patchKey = "fix";
 
-let base = [0,0,0]
+let base = [0, 0, 0]
 function start(path, args) {
   let parsedPath = path;
   if (!path.endsWith('/')) {
@@ -21,14 +21,13 @@ function start(path, args) {
       patchKey = config.keys.patch ?? "fix";
       majorKey = config.keys.major ?? "new";
 
-      base = config.base.split('.')??[0,0,0]
-      console.log(config)
+      base = config.base.split('.') ?? [0, 0, 0]
     }
-  }catch(e)
-  {
+  } catch (e) {
     console.log(c.markred(' ERR. ') + " Pipoca error reading pipoca.config.json")
   }
   console.log(c.markpurple(' CFG. ') + ' Tags: ' + majorKey + ' ' + minorKey + ' ' + patchKey);
+  console.log(c.markpurple(' CFG. ') + ' Base: ' + base.toString().replaceAll(',','.'));
   if (argv.at(2) == "--init") {
     fs.writeFileSync(parsedPath + '.pipoca.config.json', `
     {
@@ -42,8 +41,12 @@ function start(path, args) {
     }`)
     return;
   }
-  if (argv.at(2) == "--start") {
+  if (argv.includes("--just-see")) {
     doRead(true);
+    return;
+  }
+  if (argv.includes("--run")) {
+    doRead();
     return;
   }
 
@@ -91,11 +94,11 @@ function doRead(testing) {
         minor = 0;
         patch = 0;
       }
-      if(testing)
-      {
-        console.log(i.trim().padEnd(10,' ') + '  '+major+"."+minor+"."+patch)
+      if (testing) {
+        console.log(c.markocean(" INF. ") +c.bold(' '+i.trim().padEnd(10, ' ')) + '  ' + major + "." + minor + "." + patch)
       }
     });
+    if(testing)return;
     console.log(c.markocean(" INF. ") + " Commits & Amends: " + commits.length);
     let setVersion = setToVersion(major, minor, patch);
     if (setVersion.error) {
@@ -108,7 +111,9 @@ function doRead(testing) {
       return;
     }
     execSync("git add package.json");
-    execSync("git add package-lock.json");
+    if (fs.existsSync('package-lock.json')) {
+      execSync("git add package-lock.json");
+    }
     let commitProc = exec("git commit --amend --no-edit");
 
     commitProc.stdout.on("data", (data) => {

@@ -38,8 +38,10 @@ function setToVersion(major, minor, patch) {
    ver[0] = major;
    pkg.version = ver.toString().replaceAll(',', '.')
 
-   fs.writeFileSync('./package.json', JSON.stringify(pkg,null,2))
-   fixPkgLock(ver.toString().replaceAll(',', '.'))
+   fs.writeFileSync('./package.json', JSON.stringify(pkg, null, 2))
+   if (fs.existsSync('package-lock.json')) {
+      fixPkgLock(ver.toString().replaceAll(',', '.'))
+   }
    return { error: false, message: v[0] + '.' + v[1] + '.' + v[2] + ' => ' + pkg.version }
 }
 function setToPatch(patch) {

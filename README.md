@@ -6,7 +6,6 @@
 
 #### Your commits should start with the tag, and in next a colon, and finaly your mensage... See the examples
 
-
 ## To install
 
 ```console
@@ -66,10 +65,18 @@ git commit "kruceo: testing custom tag"
 
 This will disregard all your commits with "att", now it's just added on commits that have your new tag
 
-## To do a a single run
+## To do a single run
 
 ```console
-pipoca --start
+pipoca --run
+```
+
+<strong>⚠️ Remember: Use this after your commit! ⚠️</strong>
+
+## To do a single run printing all changes, but nothing is applied
+
+```console
+pipoca --just-see
 ```
 
 Print in log anything like this
