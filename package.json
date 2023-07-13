@@ -9,7 +9,7 @@
     "coloraljs": "github:kruceo/coloraljs"
   },
   "bin": {
-    "pipoca": "./src/bin/start.js",
-    "ppc": "./src/bin/start.js"
+    "pipoca": "./src/bin/start.mjs",
+    "ppc": "./src/bin/start.mjs"
   }
 }

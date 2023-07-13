@@ -14,7 +14,7 @@ npm i -g kruceo/pipocajs
 
 ## To start the watcher
 
-```console
+```bash
 pipoca
 ```
 
@@ -35,8 +35,8 @@ If you have the current version in "0.0.0", now is "0.0.1"
 
 ## To customize
 
-```console
-pipoca --init
+```bash
+pipoca --create-config
 ```
 
 This command create a "pipoca.config.json" file, that contains the property "keys" with "patch","minor" and "major", just replace the values with the word that you prefer, like this:
@@ -54,7 +54,7 @@ This command create a "pipoca.config.json" file, that contains the property "key
 
 Now
 
-```console
+```bash
 pipoca
 ```
 
@@ -67,26 +67,16 @@ This will disregard all your commits with "att", now it's just added on commits 
 
 ## To do a single run
 
-```console
-pipoca --run
+```bash
+pipoca --single-run
 ```
 
 <strong>⚠️ Remember: Use this after your commit! ⚠️</strong>
 
-## To do a single run printing all changes, but nothing is applied
-
-```console
-pipoca --just-see
-```
+## To show history
 
 Print in log anything like this
 
-```console
-init        0.0.0
-fix         0.0.1
-fix         0.0.2
-att         0.1.0
-fix         0.1.1
-pipoca      0.1.1
-fix         0.1.2
+```bash
+pipoca --history
 ```
