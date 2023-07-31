@@ -7,12 +7,15 @@ const defaultConfig = {
         "minor":"att",
         "major":"new",
     },
-    commands:[]
+    commands:{
+        pre:[],
+        pos:[]
+    }
 }
 const configPath = './pipoca.config.json'
 /**
  * 
- * @returns {{keys:{patch:string,minor:string,major:string},commands:string[]}}
+ * @returns {defaultConfig}
  */
 export function getConfig() {
    

@@ -13,13 +13,16 @@ export function versionHandler(){
     logger.info(pkgV + ' ==> ' + calcV)
     updateVersion(calcV);
     
-    config.commands.forEach((cmd,index) => {
-        logger.info('running command ' + index)
-        cp.execSync(cmd)
-    })
+    for (const cmd of config.commands.pre) {
+        cp.execSync(cmd,{stdio:"inherit"})
+    }
     
     cp.execSync('git add package.json')
     cp.execSync('git commit --amend --no-edit')
+
+    for (const cmd of config.commands.pos) {
+        cp.execSync(cmd,{stdio:"inherit"})
+    }
     logger.ok('commited!')
 }
 
