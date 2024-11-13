@@ -9,13 +9,13 @@
 ## To install
 
 ```console
-npm i -g kruceo/pipocajs
+npm install -g kruceo/pipoca
 ```
 
 ## To start the watcher
 
 ```bash
-pipoca
+pipoca --watch
 ```
 
 With the Pipoca running, do any commit with the tag that you prefer.
@@ -43,11 +43,14 @@ This command create a "pipoca.config.json" file, that contains the property "key
 
 ```json
 {
-    "keys":
-    {
-        "patch": "fix",
-        "minor": "kruceo",
-        "major": "new",
+    "keys": {
+        "patch": ["fix","patch","style"],
+        "minor": ["feature"],
+        "major": ["new","release"],
+    },
+    "commands": {
+        "before": [],
+        "after": ["git add package.json", "git commit --amend --no-edit"]
     }
 }
 ```
@@ -55,7 +58,7 @@ This command create a "pipoca.config.json" file, that contains the property "key
 Now
 
 ```bash
-pipoca
+pipoca --watch
 ```
 
 ```console
@@ -65,18 +68,12 @@ git commit "kruceo: testing custom tag"
 
 This will disregard all your commits with "att", now it's just added on commits that have your new tag
 
-## To do a single run
+## Github actions
 
-```bash
-pipoca --single-run
-```
+This tool is really util with Github Actions
 
-<strong>⚠️ Remember: Use this after your commit! ⚠️</strong>
+You will want to see [This Example](https://github.com/Kruceo/Pipoca/blob/main/.github/workflows/version-updater.yml).
 
-## To show history
+## Other
 
-Print in log anything like this
-
-```bash
-pipoca --history
-```
+More options are disponible using `pipoca --help`.
