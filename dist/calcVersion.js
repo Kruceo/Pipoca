@@ -13,9 +13,9 @@ function calcVersion(majorTags, minorTags, patchTags, perCommitCallback) {
         }
     };
     gitlogLines.forEach(line => {
-        if (!/^.+?:.+?/.test(line))
+        if (!/^.+?(:|\/).+?/.test(line))
             return;
-        const tagMatch = line.slice(8, line.length).match(/^.+?(?=:)/);
+        const tagMatch = line.slice(8, line.length).match(/^.+?(?=(:|\/))/);
         if (!tagMatch)
             return;
         const tag = tagMatch[0];
