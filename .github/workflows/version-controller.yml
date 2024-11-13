@@ -1,0 +1,29 @@
+name: Version Updater
+
+on: [push]
+permissions:
+  contents: write
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+        with: 
+          fetch-depth: 0 
+      - name: Use Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20.x'
+
+      - name: Configure git
+        run: git config --global user.name 'kruceo' && git config --global user.email '${{secrets.GITHUB_EMAIL}}'
+      
+      - name: Run pipoca
+        run: |
+          npm install -g https://github.com/Kruceo/Pipoca.git
+          pipoca -s
+      - name: Push
+        run: |
+          git push origin HEAD
