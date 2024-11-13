@@ -18,7 +18,7 @@ function versionHandler(config) {
     console.log(pkgV + ' ==> ' + calcV);
     (0, package_1.updateVersion)(calcV);
     for (const cmd of config.commands.after) {
-        child_process_1.default.execSync(cmd, { stdio: "inherit" });
+        child_process_1.default.execSync(cmd.replace(/\$version\$/g, calcV), { stdio: "inherit" });
     }
 }
 exports.versionHandler = versionHandler;
