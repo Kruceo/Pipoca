@@ -3,9 +3,9 @@ import { PipocaConfig } from "./config";
 import { getPackageVersion, updateVersion } from "./package";
 import cp from 'child_process'
 
-export function versionHandler(config:PipocaConfig) {
+export function versionHandler(config: PipocaConfig) {
     for (const cmd of config.commands.before) {
-        cp.execSync(cmd,{stdio:"inherit"})
+        cp.execSync(cmd, { stdio: "inherit" })
     }
 
     const pkgV = getPackageVersion();
@@ -16,11 +16,11 @@ export function versionHandler(config:PipocaConfig) {
     updateVersion(calcV);
 
     for (const cmd of config.commands.after) {
-        cp.execSync(cmd,{stdio:"inherit"})
+        cp.execSync(cmd.replace(/\$version\$/g, calcV), { stdio: "inherit" })
     }
 }
 
-export function history(config:PipocaConfig) {
+export function history(config: PipocaConfig) {
     console.log("TAG".padEnd(7, ' ') + '| VERSION')
     console.log("".padEnd(17, '='))
     calcVersion(config.keys.major, config.keys.minor, config.keys.patch, (t, v) => {
