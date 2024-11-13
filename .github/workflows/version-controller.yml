@@ -22,8 +22,7 @@ jobs:
       
       - name: Run pipoca
         run: |
-          npm install -g https://github.com/Kruceo/Pipoca.git
-          pipoca -s
+          npx https://github.com/Kruceo/Pipoca.git
       - name: Push
         run: |
           git push origin HEAD
