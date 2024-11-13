@@ -13,9 +13,9 @@ export default function calcVersion(majorTags: string[], minorTags: string[], pa
         }
     }
     gitlogLines.forEach(line => {
-        if (!/^.+?:.+?/.test(line)) return;
+        if (!/^.+?(:|\/).+?/.test(line)) return;
 
-        const tagMatch = line.slice(8, line.length).match(/^.+?(?=:)/)
+        const tagMatch = line.slice(8, line.length).match(/^.+?(?=(:|\/))/)
         if (!tagMatch) return;
 
         const tag = tagMatch[0]

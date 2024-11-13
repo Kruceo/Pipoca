@@ -1,0 +1,20 @@
+{
+  "keys": {
+    "patch": [
+      "fix"
+    ],
+    "minor": [
+      "att"
+    ],
+    "major": [
+      "new"
+    ]
+  },
+  "commands": {
+    "before": [],
+    "after": [
+      "git add package.json",
+      "git commit -m 'update version'"
+    ]
+  }
+}
