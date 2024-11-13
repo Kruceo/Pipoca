@@ -70,9 +70,39 @@ This will disregard all your commits with "att", now it's just added on commits 
 
 ## Github actions
 
-This tool is really util with Github Actions
+This tool is really util with Github Actions.
 
-You will want to see [This Example](https://github.com/Kruceo/Pipoca/blob/main/.github/workflows/version-updater.yml).
+```yaml
+name: Version Updater
+
+on: [push]
+permissions:
+  contents: write
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+        with: 
+          fetch-depth: 0 
+
+      - name: Use Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20.x'
+
+      - name: Configure git
+        run: git config --global user.name 'username' && git config --global user.email 'email@mail.com'
+      
+      - name: Run pipoca
+        run: |
+          npx -y https://github.com/Kruceo/Pipoca.git
+
+      - name: Push
+        run: |
+          git push origin HEAD
+```
 
 ## Other
 
