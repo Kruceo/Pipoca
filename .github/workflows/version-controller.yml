@@ -22,7 +22,7 @@ jobs:
       
       - name: Run pipoca
         run: |
-          npx https://github.com/Kruceo/Pipoca.git
+          npx -y https://github.com/Kruceo/Pipoca.git
       - name: Push
         run: |
           git push origin HEAD
