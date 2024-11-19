@@ -1,109 +1,123 @@
-# PipocaJS
+# Pipoca: Simplified Semantic Versioning
 
-#### Pipoca edit your package.json version every git commit that you do, and give the version based on all commits of the project, it work with tags, like "fix", "att" and "new", but it is customizable
+Pipoca automates versioning in your `package.json` based on your Git commit history. It's highly customizable and integrates seamlessly with GitHub Actions for streamlined CI/CD workflows.
 
-#### Each tag adds one to the patch,minor or major value of version
+---
 
-#### Your commits should start with the tag, and in next a colon, and finaly your mensage... See the examples
+## 📦 Installation
 
-## To install
+Install Pipoca globally with npm:
 
-```console
+```bash
 npm install -g kruceo/pipoca
 ```
 
-## To start the watcher
+---
 
+## 🔄 Basic Usage
+
+### 1. **Single Command Update**
+```bash
+pipoca
+```
+
+This updates the `package.json` version if necessary and amends the change into your latest commit. For full control, you can customize Pipoca's configuration.
+
+---
+
+### 2. **Watch Mode**
 ```bash
 pipoca --watch
 ```
 
-With the Pipoca running, do any commit with the tag that you prefer.
+This monitors your repository for commits and automatically updates `package.json` after each commit.
 
-Remember, by default:
+---
 
-* "fix" increments to patch (0.0.X)
-* "att" increments to minor (0.X.0)
-* "new" increments to major (X.0.0)
+## 🔧 Customizing Pipoca
 
-```console
-git add .
-git commit -m "fix: pipoca test"
-```
-
-If you have the current version in "0.0.0", now is "0.0.1"
-
-## To customize
+Generate a configuration file with:
 
 ```bash
 pipoca --create-config
 ```
 
-This command create a "pipoca.config.json" file, that contains the property "keys" with "patch","minor" and "major", just replace the values with the word that you prefer, like this:
+This creates a `pipoca.config.json` file where you can define your custom tags and actions:
 
 ```json
 {
-    "keys": {
-        "patch": ["fix","patch","style"],
-        "minor": ["feature"],
-        "major": ["new","release"],
-    },
-    "commands": {
-        "before": [],
-        "after": ["git add package.json", "git commit --amend --no-edit"]
-    }
+  "keys": {
+    "patch": ["fix", "style", "docs"],
+    "minor": ["feature", "update"],
+    "major": ["new", "release"]
+  },
+  "commands": {
+    "before": [],
+    "after": ["git add package.json", "git commit --amend --no-edit"]
+  }
 }
 ```
 
-Now
+### Example:
+- Tags **`fix`**, **`style`**, and **`docs`** increment the **patch** version (`0.0.x`).
+- Tags **`feature`** and **`update`** increment the **minor** version (`0.x.0`).
+- Tags **`new`** and **`release`** increment the **major** version (`x.0.0`).
 
-```bash
-pipoca --watch
-```
+---
 
-```console
-git add .
-git commit "kruceo: testing custom tag"
-```
+## 🤖 GitHub Actions Integration
 
-This will disregard all your commits with "att", now it's just added on commits that have your new tag
-
-## Github actions
-
-This tool is really util with Github Actions.
+Pipoca is a perfect fit for CI/CD pipelines. Here's a sample GitHub Actions workflow for automated versioning:
 
 ```yaml
 name: Version Updater
 
 on: [push]
+
 permissions:
   contents: write
+
 jobs:
-  build:
+  versioning:
     runs-on: ubuntu-latest
 
     steps:
       - uses: actions/checkout@v4
-        with: 
-          fetch-depth: 0 
+        with:
+          fetch-depth: 0
 
-      - name: Use Node.js
+      - name: Set up Node.js
         uses: actions/setup-node@v4
         with:
           node-version: '20.x'
 
-      - name: Configure git
-        run: git config --global user.name 'username' && git config --global user.email 'email@mail.com'
-      
-      - name: Run pipoca
+      - name: Configure Git
+        run: |
+          git config --global user.name 'Your Name'
+          git config --global user.email 'your-email@example.com'
+
+      - name: Run Pipoca
         run: |
           npx -y https://github.com/Kruceo/Pipoca.git
 
-      - name: Push
-        run: |
-          git push origin HEAD
+      - name: Push Changes
+        run: git push origin HEAD
 ```
 
-## Other
+### What It Does:
+1. Updates your `package.json` version based on commit tags.
+2. Pushes the updated `package.json` back to the repository.
 
-More options are disponible using `pipoca --help`.
+---
+
+## 🛠 Additional Options
+
+Discover more commands and features with:
+
+```bash
+pipoca --help
+```
+
+---
+
+Streamline your versioning with Pipoca and let it handle the complexity for you!
