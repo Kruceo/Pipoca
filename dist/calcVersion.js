@@ -2,7 +2,7 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 const child_process_1 = require("child_process");
 function calcVersion(majorTags, minorTags, patchTags, perCommitCallback) {
-    const gitLog = (0, child_process_1.execSync)('git log --all --oneline').toString();
+    const gitLog = (0, child_process_1.execSync)('git log --oneline HEAD').toString();
     const gitlogLines = gitLog.split('\n').reverse();
     let version = {
         patch: 0,

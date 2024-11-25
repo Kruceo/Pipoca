@@ -4,10 +4,10 @@
       "fix"
     ],
     "minor": [
-      "att"
+      "att","feat","Feat"
     ],
     "major": [
-      "new"
+      "new","Release","release"
     ]
   },
   "commands": {
