@@ -1,7 +1,7 @@
 import { execSync } from 'child_process'
 
 export default function calcVersion(majorTags: string[], minorTags: string[], patchTags: string[], perCommitCallback?: (tag: string, version: string) => void) {
-    const gitLog = execSync('git log --all --oneline').toString();
+    const gitLog = execSync('git log --oneline HEAD').toString();
     const gitlogLines = gitLog.split('\n').reverse()
 
     let version = {
@@ -14,7 +14,7 @@ export default function calcVersion(majorTags: string[], minorTags: string[], pa
     }
     gitlogLines.forEach(line => {
         if (!/^.+?(:|\/).+?/.test(line)) return;
-
+        
         const tagMatch = line.slice(8, line.length).match(/^.+?(?=(:|\/))/)
         if (!tagMatch) return;
 
