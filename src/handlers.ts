@@ -1,7 +1,8 @@
 import { existsSync } from "fs";
 import calcVersion from "./calcVersion";
 import { PipocaConfig } from "./config";
-import { getPackageVersion, updateVersion as updatePkgJsonVersion } from "./package";
+import { updateVersion as updatePkgJsonVersion } from "./formats/package.json";
+import { updateVersion as updateGradleKTJsonVersion } from "./formats/gradle.kts";
 import cp from 'child_process'
 import path from "path";
 import { exit } from "process";
@@ -39,10 +40,17 @@ export function updateVersionHandler(dst: string, version: string) {
     switch (basename) {
         case "package.json":
             if (!existsSync(dst)) {
-                console.error('package.json not exist')
+                console.error(`${basename} not exist`)
                 exit(1)
             };
             updatePkgJsonVersion(dst, version)
+            break;
+        case "build.gradle.kts":
+            if (!existsSync(dst)) {
+                console.error(`${basename} not exist`)
+                exit(1)
+            };
+            updateGradleKTJsonVersion(dst, version)
             break;
 
         default:
