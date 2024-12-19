@@ -53,7 +53,11 @@ This creates a `pipoca.config.json` file where you can define your custom tags a
   },
   "commands": {
     "before": [],
-    "after": ["git add package.json", "git commit --amend --no-edit"]
+    "after": [
+      "--update-version package.json $version$",
+      "git add package.json", 
+      "git commit -m 'update version'"
+      ]
   }
 }
 ```

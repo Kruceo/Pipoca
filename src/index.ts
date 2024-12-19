@@ -41,10 +41,12 @@ function run() {
     }
 
     if (checkArgv('--help')) {
-        console.log("[Command]".padEnd(30, ' ') + ' [Description]')
-        console.log("--create-config -c ".padEnd(30, '.') + " Create a config file with default values.")
-        console.log("--show-history -H ".padEnd(30, '.') + " Show your versions history.")
-        console.log("--watch".padEnd(30, '.') + " Watch .git and updates version on change.")
+        const pad = 60
+        console.log("[Command]".padEnd(pad, ' ') + ' [Description]')
+        console.log("--create-config -c ".padEnd(pad, '.') + " Create a config file with default values.")
+        console.log("--update-version [*.kts|*.json] [version]".padEnd(pad, '.') + " Updates the version of specific file formats.")
+        console.log("--show-history -H ".padEnd(pad, '.') + " Show your versions history.")
+        console.log("--watch".padEnd(pad, '.') + " Watch .git and updates version on change.")
         process.exit()
     }
 

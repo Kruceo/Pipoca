@@ -2,7 +2,7 @@ import { existsSync } from "fs";
 import calcVersion from "./calcVersion";
 import { PipocaConfig } from "./config";
 import { updateVersion as updatePkgJsonVersion } from "./formats/package.json";
-import { updateVersion as updateGradleKTJsonVersion } from "./formats/gradle.kts";
+import { updateVersion as updateGradleKTJsonVersion } from "./formats/build.gradle.kts";
 import cp from 'child_process'
 import path from "path";
 import { exit } from "process";
