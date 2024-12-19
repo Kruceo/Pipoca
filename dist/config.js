@@ -33,7 +33,11 @@ const defaultConfig = {
     },
     commands: {
         before: [],
-        after: ["git add package.json", "git commit --amend --no-edit"]
+        after: [
+            `--update-version package.json $version$`,
+            "git add package.json",
+            "git commit --amend --no-edit"
+        ]
     }
 };
 const configPath = './pipoca.config.json';

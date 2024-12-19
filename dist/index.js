@@ -24,11 +24,6 @@ function run() {
         (0, process_1.exit)(1);
     }
     ;
-    if (!fs_1.default.existsSync(path_1.default.resolve(parentFolder, "package.json"))) {
-        console.error('package.json not exist');
-        (0, process_1.exit)(1);
-    }
-    ;
     // commands
     if (checkArgv('--create-config', '-c')) {
         (0, config_1.createConfigFile)();
@@ -46,10 +41,24 @@ function run() {
         });
     }
     if (checkArgv('--help')) {
-        console.log("[Command]".padEnd(30, ' ') + ' [Description]');
-        console.log("--create-config -c ".padEnd(30, '.') + " Create a config file with default values.");
-        console.log("--show-history -H ".padEnd(30, '.') + " Show your versions history.");
-        console.log("--watch".padEnd(30, '.') + " Watch .git and updates package.json on change.");
+        const pad = 60;
+        console.log("[Command]".padEnd(pad, ' ') + ' [Description]');
+        console.log("--create-config -c ".padEnd(pad, '.') + " Create a config file with default values.");
+        console.log("--update-version [*.kts|*.json] [version]".padEnd(pad, '.') + " Updates the version of specific file formats.");
+        console.log("--show-history -H ".padEnd(pad, '.') + " Show your versions history.");
+        console.log("--watch".padEnd(pad, '.') + " Watch .git and updates version on change.");
+        process.exit();
+    }
+    if (checkArgv('--update-version')) {
+        const argIndex = process.argv.indexOf("--update-version");
+        const dst = process.argv.at(argIndex + 1);
+        const version = process.argv.at(argIndex + 2);
+        if (!dst || !version) {
+            console.error('wrong format:\nuse --update-version [package.json|other] [version|1.2.3]');
+            (0, process_1.exit)(1);
+        }
+        ;
+        (0, handlers_1.updateVersionHandler)(dst, version);
         process.exit();
     }
     (0, handlers_1.versionHandler)(config);
