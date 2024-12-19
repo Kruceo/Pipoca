@@ -15,8 +15,8 @@ export function getPackageVersion() {
     return packageObj.version
 }
 
-export function updateVersion(version: string) {
+export function updateVersion(pkgPath:string,version: string) {
     let packageObj = getPackage()
     packageObj.version = version
-    fs.writeFileSync('./package.json', JSON.stringify(packageObj, null, 2))
+    fs.writeFileSync(pkgPath, JSON.stringify(packageObj, null, 2))
 }

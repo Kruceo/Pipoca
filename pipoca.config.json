@@ -13,6 +13,7 @@
   "commands": {
     "before": [],
     "after": [
+      "--update-version package.json $version$",
       "git add package.json",
       "git commit -m 'update version'"
     ]

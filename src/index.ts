@@ -1,6 +1,6 @@
 import path from "path";
 import fs from 'fs'
-import { history, versionHandler } from "./handlers";
+import { history, updateVersionHandler, versionHandler } from "./handlers";
 import { createConfigFile, getConfig } from "./config";
 import { exit } from "process";
 
@@ -20,10 +20,6 @@ function run() {
         console.error('Git Head not exist')
         exit(1)
     };
-    if (!fs.existsSync(path.resolve(parentFolder, "package.json"))) {
-        console.error('package.json not exist')
-        exit(1)
-    };
 
     // commands
 
@@ -39,7 +35,7 @@ function run() {
 
     if (checkArgv('--watch')) {
         console.info('watcher initiated...')
-        fs.watch(path.resolve(parentFolder,dotGitHead), () => {
+        fs.watch(path.resolve(parentFolder, dotGitHead), () => {
             versionHandler(config)
         })
     }
@@ -48,7 +44,22 @@ function run() {
         console.log("[Command]".padEnd(30, ' ') + ' [Description]')
         console.log("--create-config -c ".padEnd(30, '.') + " Create a config file with default values.")
         console.log("--show-history -H ".padEnd(30, '.') + " Show your versions history.")
-        console.log("--watch".padEnd(30, '.') + " Watch .git and updates package.json on change.")
+        console.log("--watch".padEnd(30, '.') + " Watch .git and updates version on change.")
+        process.exit()
+    }
+
+    if (checkArgv('--update-version')) {
+        const argIndex = process.argv.indexOf("--update-version")
+
+        const dst = process.argv.at(argIndex + 1)
+        const version = process.argv.at(argIndex + 2)
+        if (!dst || !version) {
+            console.error('wrong format:\nuse --update-version [package.json|other] [version|1.2.3]')
+            exit(1)
+        };
+
+        updateVersionHandler(dst, version)
+
         process.exit()
     }
 
@@ -57,7 +68,7 @@ function run() {
 
 export { run }
 
-function checkArgv(...args:string[]) {
+function checkArgv(...args: string[]) {
     let include = false
     args.forEach(each => {
         if (include) return;
