@@ -6,7 +6,6 @@ export function updateVersion(dst: string, version: string) {
         version.split(`.`)
             .reduce((a, n) => a + n.padStart(3, `0`))
         )
-        console.log(version)
     writeFileSync(dst, file
         .replace(/(?<=versionCode \= )\d+/, versionCode.toString())
         .replace(/(?<=versionName \= ").+(?=")/, version)

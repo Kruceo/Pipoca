@@ -58,7 +58,8 @@ This creates a `pipoca.config.json` file where you can define your custom tags a
       "git add package.json", 
       "git commit -m 'update version'"
       ]
-  }
+  },
+  "ignoreBeforeThisCommit": "a1b2c3d"
 }
 ```
 
@@ -66,6 +67,9 @@ This creates a `pipoca.config.json` file where you can define your custom tags a
 - Tags **`fix`**, **`style`**, and **`docs`** increment the **patch** version (`0.0.x`).
 - Tags **`feature`** and **`update`** increment the **minor** version (`0.x.0`).
 - Tags **`new`** and **`release`** increment the **major** version (`x.0.0`).
+
+### `ignoreBeforeThisCommit`
+Optional. Set a commit hash to start the version calculation from that commit (inclusive), ignoring all older commits. Useful for resetting your version baseline without rewriting history. Use `git log --oneline` to find commit hashes.
 
 ---
 
@@ -77,35 +81,33 @@ Pipoca is a perfect fit for CI/CD pipelines. Here's a sample GitHub Actions work
 name: Version Updater
 
 on: [push]
-
 permissions:
   contents: write
-
 jobs:
-  versioning:
+  build:
+
     runs-on: ubuntu-latest
 
     steps:
       - uses: actions/checkout@v4
-        with:
-          fetch-depth: 0
-
-      - name: Set up Node.js
+        with: 
+          fetch-depth: 0 
+      - name: Use Node.js
         uses: actions/setup-node@v4
         with:
           node-version: '20.x'
 
-      - name: Configure Git
+      - name: Configure git
+        run: git config --global user.name 'kruceo' && git config --global user.email '${{secrets.OWNER_EMAIL}}'
+      
+      - name: Run pipoca
         run: |
-          git config --global user.name 'Your Name'
-          git config --global user.email 'your-email@example.com'
-
-      - name: Run Pipoca
+          npx -y https://github.com/Kruceo/Pipoca.git update package.json
+      - name: Push
         run: |
-          npx -y https://github.com/Kruceo/Pipoca.git
-
-      - name: Push Changes
-        run: git push origin HEAD
+          git add package.json
+          git commit -m "[Automated] Update version"
+          git push origin HEAD
 ```
 
 ### What It Does:

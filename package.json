@@ -1,18 +1,23 @@
 {
   "name": "pipoca",
   "version": "2.2.0",
-  "description": "",
-  "main": "src/index.mjs",
-  "author": "Semantic version incrementer utility tool",
+  "description": "Semantic version incrementer utility tool",
+  "main": "src/index.ts",
+  "author": "kruceo",
   "license": "ISC",
+  "type": "module",
   "scripts": {
-    "build": "bunx tsc"
+    "build": "bun build --minify --target=node --outfile=dist/index.js ./src/index.ts"
   },
   "bin": {
-    "pipoca": "./dist/bin/start.js",
-    "ppc": "./dist/bin/start.js"
+    "pipoca": "./dist/index.js"
   },
   "devDependencies": {
-    "@types/node": "^22.9.0"
+    "@types/node": "^25.6.0"
+  },
+  "dependencies": {
+    "cheloni": "^0.6.0",
+    "chokidar": "^5.0.0",
+    "zod": "^4.3.6"
   }
 }

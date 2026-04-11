@@ -6,25 +6,22 @@ export interface PipocaConfig {
         minor: string[]
         major: string[]
     },
-    commands:{
+    commands: {
         before: string[],
         after: string[]
-    }
+    },
+    ignoreBeforeThisCommit?: string
 }
 
-const defaultConfig: PipocaConfig = {
+export const DEFAULT_CONFIG: PipocaConfig = {
     keys: {
         "patch": ["fix"],
         "minor": ["att"],
         "major": ["new"],
     },
-    commands:{
-        before:[],
-        after:[
-            `--update-version package.json $version$`,
-            "git add package.json",
-            "git commit --amend --no-edit"
-        ]
+    commands: {
+        before: [],
+        after: []
     }
 }
 const configPath = './pipoca.config.json'
@@ -32,14 +29,14 @@ const configPath = './pipoca.config.json'
 export function getConfig(): PipocaConfig {
     if (existsSync(configPath)) {
         const loadedConfig = JSON.parse(fs.readFileSync(configPath, 'utf-8'))
-        return { ...defaultConfig, ...loadedConfig }
+        return { ...DEFAULT_CONFIG, ...loadedConfig }
 
     }
-    return defaultConfig
+    return DEFAULT_CONFIG
 }
 
 export function createConfigFile() {
     if (!existsSync(configPath)) {
-        fs.writeFileSync(configPath, JSON.stringify(defaultConfig, null, 2))
+        fs.writeFileSync(configPath, JSON.stringify(DEFAULT_CONFIG, null, 2))
     }
 }

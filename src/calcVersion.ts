@@ -1,7 +1,8 @@
 import { execSync } from 'child_process'
 
-export default function calcVersion(majorTags: string[], minorTags: string[], patchTags: string[], perCommitCallback?: (tag: string, version: string) => void) {
-    const gitLog = execSync('git log --oneline HEAD').toString();
+export default function calcVersion(majorTags: string[], minorTags: string[], patchTags: string[], ignoreBeforeThisCommit?: string, perCommitCallback?: (tag: string, version: string) => void) {
+    const gitLogRange = ignoreBeforeThisCommit ? `${ignoreBeforeThisCommit}~1..HEAD` : 'HEAD'
+    const gitLog = execSync(`git log --oneline ${gitLogRange}`).toString();
     const gitlogLines = gitLog.split('\n').reverse()
 
     let version = {
