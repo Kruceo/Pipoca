@@ -1,0 +1,10 @@
+src
+node_modules
+.github
+.kilo
+test
+.gitignore
+.npmignore
+pipoca.config.json
+*.webp
+tsconfig.json

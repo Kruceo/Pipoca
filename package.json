@@ -2,12 +2,12 @@
   "name": "pipoca",
   "version": "3.0.0",
   "description": "Semantic version incrementer utility tool",
-  "main": "src/index.ts",
+  "main": "dist/index.js",
   "author": "kruceo",
   "license": "ISC",
   "type": "module",
   "scripts": {
-    "build": "bun build --minify --target=node --outfile=dist/index.js ./src/index.ts"
+    "build": "bun build --minify --target=node --outfile=dist/index.js ./src/index.ts && sed -i '' '1s|^|#!/usr/bin/env node\\n|' dist/index.js"
   },
   "bin": {
     "pipoca": "./dist/index.js"
