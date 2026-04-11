@@ -8,3 +8,4 @@ test
 pipoca.config.json
 *.webp
 tsconfig.json
+docs

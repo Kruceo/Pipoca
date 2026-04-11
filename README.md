@@ -1,6 +1,6 @@
 # Pipoca: Simplified Semantic Versioning
 
-Pipoca automates versioning in your `package.json` based on your Git commit history. It's highly customizable and integrates seamlessly with GitHub Actions for streamlined CI/CD workflows.
+Pipoca automates versioning in your `package.json` (or `build.gradle.kts`) based on your Git commit history. It's highly customizable and integrates seamlessly with GitHub Actions for streamlined CI/CD workflows.
 
 ---
 
@@ -14,35 +14,55 @@ npm install -g kruceo/pipoca
 
 ---
 
-## 🔄 Basic Usage
+## 🔄 Commands
 
-### 1. **Single Command Update**
-```bash
-pipoca
+```
+Usage: pipoca [options]
+
+Commands:
+  history (h)    Show tag history with calculated versions
+  update  (u)    Update project version based on semantic commit history
+  init    (i)    Create a default pipoca.config.json file
+  help           Show help
+  version        Show version
+
+Options:
+  --version, -v    Show version information
+  --help,    -h    Show help
 ```
 
-This updates the `package.json` version if necessary and amends the change into your latest commit. For full control, you can customize Pipoca's configuration.
+### `pipoca update <file>`
 
----
+Updates the version in the specified file based on semantic commit history. Supports:
 
-### 2. **Watch Mode**
+- `package.json`
+- `build.gradle.kts`
+
 ```bash
-pipoca --watch
+pipoca update package.json
 ```
 
-This monitors your repository for commits and automatically updates `package.json` after each commit.
+### `pipoca history`
+
+Shows the tag history with the calculated version for each tag.
+
+```bash
+pipoca history
+```
+
+### `pipoca init`
+
+Creates a default `pipoca.config.json` file in the current directory.
+
+```bash
+pipoca init
+```
 
 ---
 
 ## 🔧 Customizing Pipoca
 
-Generate a configuration file with:
-
-```bash
-pipoca --create-config
-```
-
-This creates a `pipoca.config.json` file where you can define your custom tags and actions:
+Edit the `pipoca.config.json` file to define your custom tags and actions:
 
 ```json
 {
@@ -55,9 +75,9 @@ This creates a `pipoca.config.json` file where you can define your custom tags a
     "before": [],
     "after": [
       "--update-version package.json $version$",
-      "git add package.json", 
+      "git add package.json",
       "git commit -m 'update version'"
-      ]
+    ]
   },
   "ignoreBeforeThisCommit": "a1b2c3d"
 }
@@ -90,8 +110,8 @@ jobs:
 
     steps:
       - uses: actions/checkout@v4
-        with: 
-          fetch-depth: 0 
+        with:
+          fetch-depth: 0
       - name: Use Node.js
         uses: actions/setup-node@v4
         with:
@@ -99,7 +119,7 @@ jobs:
 
       - name: Configure git
         run: git config --global user.name 'kruceo' && git config --global user.email '${{secrets.OWNER_EMAIL}}'
-      
+
       - name: Run pipoca
         run: |
           npx -y https://github.com/Kruceo/Pipoca.git update package.json
@@ -116,13 +136,14 @@ jobs:
 
 ---
 
-## 🛠 Additional Options
+## 📚 Documentation
 
-Discover more commands and features with:
-
-```bash
-pipoca --help
-```
+- **[Config Examples](docs/CONFIG_EXAMPLES.md)** — Examples using `$version$` placeholder and CI/CD workflows
+- **[Versioning and Release](docs/VERSIONING_AND_RELEASE.md)** — Guide combining Pipoca with GitHub Actions and release automation
+- **[Android Project](docs/ANDROID_PROJECT.md)** — `build.gradle.kts` support with `versionCode` and `versionName`
+- **[Commit Conventions](docs/COMMIT_CONVENTIONS.md)** — How Pipoca parses commit messages and calculates versions
+- **[Docker Workflow](docs/DOCKER_WORKFLOW.md)** — Build and push Docker images tagged with the calculated version
+- **[Monorepo Setup](docs/MONOREPO.md)** — Multiple package updates, `before`/`after` commands, monorepo CI/CD
 
 ---
 
