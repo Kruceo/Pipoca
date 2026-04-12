@@ -9,7 +9,7 @@ Pipoca automates versioning in your `package.json` (or `build.gradle.kts`) based
 Install Pipoca globally with npm:
 
 ```bash
-npm install -g kruceo/pipoca
+npm install -g pipoca
 ```
 
 ---
