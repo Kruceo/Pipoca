@@ -1,6 +1,6 @@
 {
   "name": "pipoca",
-  "version": "3.0.2",
+  "version": "3.0.3",
   "description": "Semantic version incrementer utility tool",
   "main": "dist/index.js",
   "author": "kruceo",
