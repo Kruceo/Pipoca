@@ -5,9 +5,13 @@
   "main": "dist/index.js",
   "author": "kruceo",
   "license": "ISC",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Kruceo/Pipoca"
+  },
   "type": "module",
   "scripts": {
-    "build": "bun build --minify --target=node --outfile=dist/index.js ./src/index.ts && sed -i '' '1s|^|#!/usr/bin/env node\\n|' dist/index.js"
+    "build": "bun build --minify --target=node --outfile=dist/index.js --banner='#!/usr/bin/env node' ./src/index.ts"
   },
   "bin": {
     "pipoca": "./dist/index.js"
