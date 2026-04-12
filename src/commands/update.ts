@@ -6,6 +6,7 @@ import path from "path"
 import { existsSync } from "fs"
 import { updateVersion as updateBuildGraddleKTS } from "../formats/build.gradle.kts"
 import { updateVersion as updatePackageJson } from "../formats/package.json"
+import { updateVersion as updatePyprojectToml } from "../formats/pyproject.toml"
 import { exit } from "process";
 import z from "zod";
 
@@ -51,6 +52,13 @@ function updateVersionHandler(dst: string, version: string) {
                 exit(1)
             };
             updateBuildGraddleKTS(dst, version)
+            break;
+        case "pyproject.toml":
+            if (!existsSync(dst)) {
+                console.error(`${basename} not exist`)
+                exit(1)
+            };
+            updatePyprojectToml(dst, version)
             break;
 
         default:

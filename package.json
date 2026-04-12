@@ -1,6 +1,6 @@
 {
   "name": "pipoca",
-  "version": "3.0.0",
+  "version": "3.0.1",
   "description": "Semantic version incrementer utility tool",
   "main": "dist/index.js",
   "author": "kruceo",
@@ -13,9 +13,7 @@
     "pipoca": "./dist/index.js"
   },
   "devDependencies": {
-    "@types/node": "^25.6.0"
-  },
-  "dependencies": {
+    "@types/node": "^25.6.0",
     "cheloni": "^0.6.0",
     "chokidar": "^5.0.0",
     "zod": "^4.3.6"
