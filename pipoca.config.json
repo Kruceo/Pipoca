@@ -1,13 +1,19 @@
 {
   "keys": {
     "patch": [
-      "fix"
+      "fix",
+      "style",
+      "refactor",
+      "improvement"
     ],
     "minor": [
-      "att","feat","Feat","Feature"
+      "feat",
+      "feature"
     ],
     "major": [
-      "new","Release","release"
+      "breaking",
+      "release",
+      "new"
     ]
   },
   "commands": {

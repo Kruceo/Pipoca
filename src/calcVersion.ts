@@ -15,13 +15,13 @@ export default function calcVersion(majorTags: string[], minorTags: string[], pa
     }
     gitlogLines.forEach(line => {
         if (!/^.+?(:|\/).+?/.test(line)) return;
-        
+
         const tagMatch = line.slice(8, line.length).match(/^.+?(?=(:|\/))/)
         if (!tagMatch) return;
 
-        const tag = tagMatch[0]
+        const tag = tagMatch[0].toLowerCase()
 
-        if ([...minorTags, ...majorTags, ...patchTags].includes(tag)) {
+        if ([...minorTags, ...majorTags, ...patchTags].map(f => f.toLowerCase()).includes(tag)) {
 
             if (patchTags.includes(tag)) {
                 version.patch++

@@ -24,6 +24,27 @@ export const DEFAULT_CONFIG: PipocaConfig = {
         after: []
     }
 }
+
+export const TEMPLATES: Record<string, PipocaConfig> = {
+    default: DEFAULT_CONFIG,
+    conventional: {
+        keys: {
+            patch: ["fix", "style", "refactor", "improvement"],
+            minor: ["feat","feature"],
+            major: ["breaking", "release"],
+        },
+        commands: { before: [], after: [] },
+    },
+    simple: {
+        keys: {
+            patch: ["fix"],
+            minor: ["feature"],
+            major: ["release"],
+        },
+        commands: { before: [], after: [] },
+    },
+}
+
 const configPath = './pipoca.config.json'
 
 export function getConfig(): PipocaConfig {
@@ -35,8 +56,9 @@ export function getConfig(): PipocaConfig {
     return DEFAULT_CONFIG
 }
 
-export function createConfigFile() {
+export function createConfigFile(template: string = 'default') {
     if (!existsSync(configPath)) {
-        fs.writeFileSync(configPath, JSON.stringify(DEFAULT_CONFIG, null, 2))
+        const config = TEMPLATES[template] ?? DEFAULT_CONFIG
+        fs.writeFileSync(configPath, JSON.stringify(config, null, 2))
     }
 }
