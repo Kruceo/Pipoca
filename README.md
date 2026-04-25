@@ -1,6 +1,6 @@
 # Pipoca: Simplified Semantic Versioning
 
-Pipoca automates versioning in your `package.json` (or `build.gradle.kts`) based on your Git commit history. It's highly customizable and integrates seamlessly with GitHub Actions for streamlined CI/CD workflows.
+Pipoca automates versioning in your `package.json`, `build.gradle.kts`, or `pyproject.toml` based on your Git commit history. It's highly customizable and integrates seamlessly with GitHub Actions for streamlined CI/CD workflows.
 
 ---
 
@@ -12,34 +12,31 @@ Install Pipoca globally with npm:
 npm install -g pipoca
 ```
 
+Or use it directly with npx (no install required):
+
+```bash
+npx pipoca update package.json
+```
+
 ---
 
-## 🔄 Commands
 
-```
-Usage: pipoca [options]
-
-Commands:
-  history (h)    Show tag history with calculated versions
-  update  (u)    Update project version based on semantic commit history
-  init    (i)    Create a default pipoca.config.json file
-  help           Show help
-  version        Show version
-
-Options:
-  --version, -v    Show version information
-  --help,    -h    Show help
-```
-
-### `pipoca update <file>`
+### `pipoca update [file]`
 
 Updates the version in the specified file based on semantic commit history. Supports:
 
 - `package.json`
 - `build.gradle.kts`
+- `pyproject.toml`
 
 ```bash
 pipoca update package.json
+```
+
+Omit the file to rely solely on `after` commands (useful for monorepos or custom workflows):
+
+```bash
+pipoca update
 ```
 
 ### `pipoca history`
@@ -48,6 +45,9 @@ Shows the tag history with the calculated version for each tag.
 
 ```bash
 pipoca history
+
+# Simplified output
+pipoca history --simple
 ```
 
 ### `pipoca init`
@@ -69,14 +69,14 @@ Edit the `pipoca.config.json` file to define your custom tags and actions:
   "keys": {
     "patch": ["fix", "style", "docs"],
     "minor": ["feature", "update"],
-    "major": ["new", "release"]
+    "major": ["release"]
   },
   "commands": {
     "before": [],
     "after": [
-      "--update-version package.json $version$",
-      "git add package.json",
-      "git commit -m 'update version'"
+      "npm version $version$ --no-git-tag-version",
+      "git tag v$version$",
+      "git push origin --tags"
     ]
   },
   "ignoreBeforeThisCommit": "a1b2c3d"
@@ -86,7 +86,13 @@ Edit the `pipoca.config.json` file to define your custom tags and actions:
 ### Example:
 - Tags **`fix`**, **`style`**, and **`docs`** increment the **patch** version (`0.0.x`).
 - Tags **`feature`** and **`update`** increment the **minor** version (`0.x.0`).
-- Tags **`new`** and **`release`** increment the **major** version (`x.0.0`).
+- Tags **`release`** increments the **major** version (`x.0.0`).
+
+### Execution order
+1. `before` commands run sequentially
+2. Version is calculated from commit history
+3. If a file was provided (e.g., `pipoca update package.json`), it is updated
+4. `after` commands run sequentially with `$version$` replaced
 
 ### `ignoreBeforeThisCommit`
 Optional. Set a commit hash to start the version calculation from that commit (inclusive), ignoring all older commits. Useful for resetting your version baseline without rewriting history. Use `git log --oneline` to find commit hashes.
@@ -101,38 +107,35 @@ Pipoca is a perfect fit for CI/CD pipelines. Here's a sample GitHub Actions work
 name: Version Updater
 
 on: [push]
+
 permissions:
   contents: write
-jobs:
-  build:
 
+jobs:
+  version:
     runs-on: ubuntu-latest
 
     steps:
       - uses: actions/checkout@v4
         with:
           fetch-depth: 0
-      - name: Use Node.js
-        uses: actions/setup-node@v4
-        with:
-          node-version: '20.x'
 
       - name: Configure git
-        run: git config --global user.name 'kruceo' && git config --global user.email '${{secrets.OWNER_EMAIL}}'
+        run: |
+          git config user.name 'bot'
+          git config user.email 'bot@example.com'
 
       - name: Run pipoca
-        run: |
-          npx -y https://github.com/Kruceo/Pipoca.git update package.json
-      - name: Push
+        run: npx -y pipoca update package.json
+
+      - name: Push version change
         run: |
           git add package.json
-          git commit -m "[Automated] Update version"
-          git push origin HEAD
+          git diff --cached --quiet || git commit -m "chore: update version"
+          git push
 ```
 
-### What It Does:
-1. Updates your `package.json` version based on commit tags.
-2. Pushes the updated `package.json` back to the repository.
+> **Note:** `fetch-depth: 0` is required so Pipoca can read the full commit history.
 
 ---
 
@@ -144,7 +147,3 @@ jobs:
 - **[Commit Conventions](docs/COMMIT_CONVENTIONS.md)** — How Pipoca parses commit messages and calculates versions
 - **[Docker Workflow](docs/DOCKER_WORKFLOW.md)** — Build and push Docker images tagged with the calculated version
 - **[Monorepo Setup](docs/MONOREPO.md)** — Multiple package updates, `before`/`after` commands, monorepo CI/CD
-
----
-
-Streamline your versioning with Pipoca and let it handle the complexity for you!
