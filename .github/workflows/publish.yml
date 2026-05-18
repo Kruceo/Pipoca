@@ -1,6 +1,9 @@
 name: Publish Package
 
 on:
+  workflow_run:
+    workflows: ["Version Updater"]
+    types: [completed]
   release:
     types: [published]
   workflow_dispatch:
@@ -11,6 +14,7 @@ permissions:
 
 jobs:
   publish:
+    if: ${{ !github.event.workflow_run || github.event.workflow_run.conclusion == 'success' }}
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
