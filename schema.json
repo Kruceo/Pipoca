@@ -1,0 +1,67 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/Kruceo/Pipoca/main/schema.json",
+  "title": "Pipoca Config",
+  "description": "Configuration schema for Pipoca — semantic version incrementer",
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "$schema": {
+      "type": "string",
+      "description": "Reference to this schema"
+    },
+    "keys": {
+      "type": "object",
+      "description": "Commit tag prefixes mapped to semver bump levels",
+      "additionalProperties": false,
+      "properties": {
+        "patch": {
+          "type": "array",
+          "description": "Tags that trigger a patch bump (e.g. fix, style, refactor)",
+          "items": { "type": "string" },
+          "minItems": 1
+        },
+        "minor": {
+          "type": "array",
+          "description": "Tags that trigger a minor bump (e.g. feat, feature)",
+          "items": { "type": "string" },
+          "minItems": 1
+        },
+        "major": {
+          "type": "array",
+          "description": "Tags that trigger a major bump (e.g. breaking, release)",
+          "items": { "type": "string" },
+          "minItems": 1
+        }
+      },
+      "required": ["patch", "minor", "major"]
+    },
+    "commands": {
+      "type": "object",
+      "description": "Shell commands to run before/after version calculation",
+      "additionalProperties": false,
+      "properties": {
+        "before": {
+          "type": "array",
+          "description": "Commands executed before version calculation",
+          "items": { "type": "string" }
+        },
+        "after": {
+          "type": "array",
+          "description": "Commands executed after version calculation ($version$ placeholder supported)",
+          "items": { "type": "string" }
+        }
+      },
+      "required": ["before", "after"]
+    },
+    "ignoreBeforeThisCommit": {
+      "type": "string",
+      "description": "Commit hash — only commits after this one are considered for versioning"
+    },
+    "startingFrom": {
+      "type": "string",
+      "description": "Initial version to start counting from (e.g. \"0.5.0\"). Defaults to \"0.0.0\"."
+    }
+  },
+  "required": ["keys", "commands"]
+}

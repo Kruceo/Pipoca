@@ -7,15 +7,16 @@ export interface VersionEntry {
     message: string
 }
 
-export default function calcVersion(majorTags: string[], minorTags: string[], patchTags: string[], ignoreBeforeThisCommit?: string, perCommitCallback?: (entry: VersionEntry) => void) {
+export default function calcVersion(majorTags: string[], minorTags: string[], patchTags: string[], ignoreBeforeThisCommit?: string, startingFrom?: string, perCommitCallback?: (entry: VersionEntry) => void) {
     const gitLogRange = ignoreBeforeThisCommit ? `${ignoreBeforeThisCommit}~1..HEAD` : 'HEAD'
     const gitLog = execSync(`git log --oneline ${gitLogRange}`).toString();
     const gitlogLines = gitLog.split('\n').reverse()
 
+    const startingParts = startingFrom ? startingFrom.split('.') : []
     let version = {
-        patch: 0,
-        minor: 0,
-        major: 0,
+        major: parseInt(startingParts[0]) || 0,
+        minor: parseInt(startingParts[1]) || 0,
+        patch: parseInt(startingParts[2]) || 0,
         toString: () => {
             return version.major + '.' + version.minor + '.' + version.patch
         }
@@ -32,14 +33,14 @@ export default function calcVersion(majorTags: string[], minorTags: string[], pa
 
         if ([...minorTags, ...majorTags, ...patchTags].map(f => f.toLowerCase()).includes(tag)) {
 
-            if (patchTags.includes(tag)) {
+            if (patchTags.map(t => t.toLowerCase()).includes(tag)) {
                 version.patch++
             }
-            if (minorTags.includes(tag)) {
+            if (minorTags.map(t => t.toLowerCase()).includes(tag)) {
                 version.minor++
                 version.patch = 0
             }
-            if (majorTags.includes(tag)) {
+            if (majorTags.map(t => t.toLowerCase()).includes(tag)) {
                 version.major++
                 version.patch = 0
                 version.minor = 0

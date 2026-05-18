@@ -77,7 +77,7 @@ const historyCmd = defineCommand({
     handler: async ({ options }) => {
         const config = getConfig()
         const entries: VersionEntry[] = []
-        calcVersion(config.keys.major, config.keys.minor, config.keys.patch, config.ignoreBeforeThisCommit, (entry) => {
+        calcVersion(config.keys.major, config.keys.minor, config.keys.patch, config.ignoreBeforeThisCommit, config.startingFrom, (entry) => {
             entries.push(entry)
         })
 

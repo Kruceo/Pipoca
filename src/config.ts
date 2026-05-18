@@ -10,6 +10,7 @@ export interface PipocaConfig {
         before: string[],
         after: string[]
     },
+    startingFrom?:string,
     ignoreBeforeThisCommit?: string
 }
 

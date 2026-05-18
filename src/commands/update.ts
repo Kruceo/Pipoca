@@ -21,7 +21,7 @@ const updateCmd = defineCommand({
             cp.execSync(cmd, { stdio: "inherit" })
         }
 
-        const calcV = calcVersion(config.keys.major, config.keys.minor, config.keys.patch, config.ignoreBeforeThisCommit)
+        const calcV = calcVersion(config.keys.major, config.keys.minor, config.keys.patch, config.ignoreBeforeThisCommit, config.startingFrom)
        
         if (positional)
             updateVersionHandler(positional, calcV)
